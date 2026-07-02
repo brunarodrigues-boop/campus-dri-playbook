@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus DRI Playbook 2026–27 · Alpha Academic Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #14213D;
+    --navy-mid: #1e3057;
+    --navy-soft: #243155;
+    --teal: #2B6F6C;
+    --teal-light: #e8f4f3;
+    --coral: #E2603D;
+    --coral-light: #fdf1ed;
+    --gold: #C9A227;
+    --gold-light: #fdf7e6;
+    --cream: #F6F2E9;
+    --cream-dim: #EDE7D9;
+    --ink: #1a2340;
+    --ink-soft: #3c4769;
+    --border: rgba(20,33,61,0.12);
+    --maxw: 960px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0ede6;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 3px solid var(--coral);
+  }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px;
+  }
+  .nav-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(246,242,233,0.6);
+  }
+  .nav-brand span { color: var(--coral); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    font-size: 0.78rem; font-weight: 500;
+    color: rgba(246,242,233,0.65);
+    text-decoration: none;
+    transition: color .15s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .nav-links a:hover { color: #fff; }
+  @media (max-width: 680px) { .nav-links { display: none; } }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--navy);
+    color: #fff;
+    padding: 72px 32px 60px;
+  }
+  .cover-inner { max-width: var(--maxw); margin: 0 auto; }
+  .cover-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--coral);
+    font-weight: 600; margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 700; line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+  .cover h1 em {
+    font-style: italic; font-weight: 500;
+    color: rgba(246,242,233,0.55);
+  }
+  .cover-meta {
+    margin-top: 28px;
+    display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; color: rgba(246,242,233,0.5);
+  }
+  .meta-item b { color: rgba(246,242,233,0.85); font-weight: 500; }
+
+  /* ── 3 COMMITMENTS ── */
+  .commitments {
+    background: var(--coral);
+    padding: 0;
+  }
+  .commitments-grid {
+    max-width: var(--maxw); margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .commit-cell {
+    padding: 22px 28px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+  .commit-cell:last-child { border-right: none; }
+  .commit-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.65);
+    margin-bottom: 6px;
+  }
+  .commit-text {
+    font-size: 0.82rem; font-weight: 600; color: #fff; line-height: 1.4;
+  }
+  @media (max-width: 600px) {
+    .commitments-grid { grid-template-columns: 1fr; }
+    .commit-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .page { max-width: var(--maxw); margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── ROLE BANNER ── */
+  .role-banner {
+    background: var(--navy-mid);
+    color: #fff;
+    border-radius: 0 0 12px 12px;
+    padding: 32px 36px;
+    margin-bottom: 56px;
+  }
+  .role-banner h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem; font-weight: 600; margin-bottom: 16px;
+  }
+  .role-banner p {
+    font-size: 0.94rem; line-height: 1.65;
+    color: rgba(246,242,233,0.82); max-width: 680px;
+  }
+  .role-pills {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;
+  }
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px;
+    background: rgba(226,96,61,0.2); color: #F2C4B4;
+    border: 1px solid rgba(226,96,61,0.3);
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 64px; }
+  .section-label {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--coral); line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-title-wrap { flex: 1; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--navy); line-height: 1.2;
+  }
+
+  /* ── SUBSECTION ── */
+  .sub { margin-bottom: 32px; }
+  .sub h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal);
+    padding: 8px 0 8px 14px;
+    border-left: 3px solid var(--teal);
+    margin-bottom: 16px;
+  }
+  .sub h4 {
+    font-size: 0.88rem; font-weight: 700;
+    color: var(--navy); margin: 20px 0 8px;
+  }
+  p { font-size: 0.93rem; line-height: 1.7; color: var(--ink-soft); margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  /* ── LISTS ── */
+  ul, ol { padding-left: 20px; margin-bottom: 14px; }
+  li { font-size: 0.93rem; line-height: 1.65; color: var(--ink-soft); margin-bottom: 6px; }
+  li strong { color: var(--ink); }
+  ul.clean { list-style: none; padding-left: 0; }
+  ul.clean li { padding-left: 18px; position: relative; }
+  ul.clean li::before { content: "—"; position: absolute; left: 0; color: var(--coral); font-weight: 700; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  thead tr { background: var(--navy); color: #fff; }
+  thead th {
+    padding: 11px 16px; text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 600;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:nth-child(even) { background: rgba(20,33,61,0.03); }
+  tbody td { padding: 11px 16px; line-height: 1.5; color: var(--ink-soft); vertical-align: top; }
+  tbody td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: 8px; padding: 18px 22px;
+    margin-bottom: 20px; display: flex; gap: 14px;
+  }
+  .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { flex: 1; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 0.88rem; }
+  .callout-body p { margin: 0; font-size: 0.87rem; }
+  .callout.navy { background: var(--navy); color: #fff; }
+  .callout.navy p { color: rgba(246,242,233,0.82); }
+  .callout.navy strong { color: #fff; }
+  .callout.teal { background: var(--teal-light); border-left: 4px solid var(--teal); }
+  .callout.teal strong { color: var(--teal); }
+  .callout.coral { background: var(--coral-light); border-left: 4px solid var(--coral); }
+  .callout.coral strong { color: var(--coral); }
+  .callout.gold { background: var(--gold-light); border-left: 4px solid var(--gold); }
+  .callout.gold strong { color: #8a6e10; }
+
+  /* ── LIFT CARDS ── */
+  .lift-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 20px; }
+  .lift-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 22px;
+    border-top: 3px solid var(--navy);
+  }
+  .lift-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem; font-weight: 700; color: var(--coral);
+    line-height: 1;
+  }
+  .lift-name { font-weight: 700; font-size: 0.88rem; color: var(--navy); margin: 6px 0 8px; }
+  .lift-desc { font-size: 0.84rem; line-height: 1.6; color: var(--ink-soft); }
+  @media (max-width: 600px) { .lift-grid { grid-template-columns: 1fr; } }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; padding: 0; margin-bottom: 16px; }
+  .checklist li {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 9px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.88rem; line-height: 1.5; color: var(--ink-soft);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "☐"; font-size: 1rem; color: var(--navy); flex-shrink: 0; margin-top: -1px;
+  }
+
+  /* ── ALWAYS / NEVER ── */
+  .an-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .an-box { border-radius: 8px; padding: 22px 24px; }
+  .an-box.always { background: #eaf7ea; border: 1px solid #a8dba8; }
+  .an-box.never { background: #fdecea; border: 1px solid #f5b4b0; }
+  .an-box h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 14px;
+  }
+  .an-box.always h4 { color: #2a7a2a; }
+  .an-box.never h4 { color: #c0392b; }
+  .an-box ul { padding-left: 16px; }
+  .an-box li { font-size: 0.86rem; margin-bottom: 7px; color: var(--ink); }
+  @media (max-width: 600px) { .an-grid { grid-template-columns: 1fr; } }
+
+  /* ── BLOCKER TABLE ── */
+  .blocker-grid { display: flex; flex-direction: column; gap: 1px; margin-bottom: 20px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .blocker-row { display: grid; grid-template-columns: 200px 1fr; background: #fff; }
+  .blocker-row:first-child .blocker-label,
+  .blocker-row:first-child .blocker-desc { background: var(--navy); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .blocker-label { padding: 12px 16px; font-weight: 600; font-size: 0.86rem; color: var(--navy); border-right: 1px solid var(--border); }
+  .blocker-desc { padding: 12px 16px; font-size: 0.86rem; line-height: 1.55; color: var(--ink-soft); }
+  @media (max-width: 600px) { .blocker-row { grid-template-columns: 1fr; } .blocker-label { border-right: none; border-bottom: 1px solid var(--border); } }
+
+  /* ── STEP LIST ── */
+  .step-list { list-style: none; padding: 0; counter-reset: step; margin-bottom: 16px; }
+  .step-list li {
+    counter-increment: step;
+    display: flex; gap: 14px; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft);
+    align-items: flex-start;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list li::before {
+    content: counter(step);
+    background: var(--navy); color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; font-weight: 600;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── Q&A / FAQ ── */
+  .faq-item { margin-bottom: 20px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .faq-q {
+    background: var(--navy); color: #fff;
+    padding: 13px 18px;
+    font-weight: 600; font-size: 0.88rem; line-height: 1.4;
+  }
+  .faq-a { padding: 14px 18px; background: #fff; font-size: 0.88rem; line-height: 1.65; color: var(--ink-soft); }
+  .faq-a ul { margin: 8px 0 0 0; padding-left: 18px; }
+  .faq-a li { margin-bottom: 5px; }
+
+  /* ── PERF TABLE ── */
+  .perf-row td:first-child { font-weight: 400; white-space: normal; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600;
+  }
+  .badge.green { background: #d4f0d4; color: #1e6e1e; }
+  .badge.teal { background: var(--teal-light); color: var(--teal); }
+  .badge.gold { background: var(--gold-light); color: #8a6e10; }
+  .badge.red { background: #fdecea; color: #c0392b; }
+
+  /* ── QUESTIONS SECTION ── */
+  .q-group { margin-bottom: 28px; }
+  .q-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--teal-light);
+  }
+  .q-list { list-style: none; padding: 0; }
+  .q-list li {
+    padding: 8px 0 8px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem; line-height: 1.55; color: var(--ink-soft);
+    position: relative;
+  }
+  .q-list li::before { content: "?"; position: absolute; left: 0; color: var(--coral); font-weight: 700; font-size: 0.75rem; top: 9px; }
+  .q-list li:last-child { border-bottom: none; }
+
+  /* ── CREDO ── */
+  .credo {
+    background: var(--navy); color: #fff;
+    border-radius: 10px; padding: 36px 40px;
+    margin: 48px 0 0;
+    text-align: center;
+  }
+  .credo blockquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+    line-height: 1.5; color: rgba(246,242,233,0.92);
+  }
+  .credo cite {
+    display: block; margin-top: 16px;
+    font-style: normal; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--coral); letter-spacing: 0.06em;
+  }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(246,242,233,0.45);
+    padding: 24px 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; text-align: center; letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">Alpha · <span>Academic Operations</span></div>
+    <div class="nav-links">
+      <a href="#platforms">Platforms</a>
+      <a href="#journey">Student Journey</a>
+      <a href="#monitoring">Monitoring</a>
+      <a href="#coaching">Coaching</a>
+      <a href="#escalation">Escalation</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-tag">Alpha · Academic Operations · 2026–27</div>
+    <h1>Campus DRI Playbook<br><em>Learning Analyst Reference Guide</em></h1>
+    <div class="cover-meta">
+      <div class="meta-item"><b>Owner:</b> Bruna Rodrigues</div>
+      <div class="meta-item"><b>Updated:</b> July 2026</div>
+      <div class="meta-item"><b>Role:</b> Campus DRI / Learning Analyst</div>
+      <div class="meta-item"><b>Minimum hours:</b> 8:00 AM – 12:00 PM CT</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 COMMITMENTS -->
+<div class="commitments">
+  <div class="commitments-grid">
+    <div class="commit-cell">
+      <div class="commit-label">Commitment 01</div>
+      <div class="commit-text">Love School</div>
+    </div>
+    <div class="commit-cell">
+      <div class="commit-label">Commitment 02</div>
+      <div class="commit-text">Learn 2× in 2 Hours</div>
+    </div>
+    <div class="commit-cell">
+      <div class="commit-label">Commitment 03</div>
+      <div class="commit-text">Learn Life Skills</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- ROLE BANNER -->
+  <div class="role-banner">
+    <h2>Your Role as Campus DRI</h2>
+    <p>You are the <strong style="color:#fff;">single point of academic accountability</strong> for your assigned campus. This is not a passive monitoring role — you own the student experience end-to-end, from flagging a student stuck in a doom loop on Monday to having an adjusted plan in place before they start Tuesday. You do not wait to be assigned students. You proactively find the students who need help before they — or their guide — asks.</p>
+    <div class="role-pills">
+      <span class="pill">All coaching call types</span>
+      <span class="pill">All subjects</span>
+      <span class="pill">8 AM – 12 PM CT minimum</span>
+      <span class="pill">System + learning monitoring</span>
+    </div>
+  </div>
+
+  <!-- 01 PLATFORMS -->
+  <div class="section" id="platforms">
+    <div class="section-label">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Setup</div>
+        <div class="section-title">Platform Access & Tools</div>
+      </div>
+    </div>
+
+    <div class="callout navy">
+      <div class="callout-icon">⚑</div>
+      <div class="callout-body">
+        <strong>Confirm working access to every platform below before your first day on campus.</strong>
+        <p>If access is missing, contact BeyondAI or Guilherme Colombo. Do not wait — a missing platform means a blind spot in your monitoring from day one.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>TimeBack Dash — Primary Tool</h3>
+      <p><strong>URL:</strong> https://alpha.timeback.com/app · Log in with your alpha.school or 2hourlearning email. Confirm admin-level access on first login.</p>
+      <p>This is where you live. Everything you monitor — XP, time on task, accuracy, grade-level progress, doom loops, test attempts — is visible here. The Notes tab, Messaging tab, PDF exports, and weekly summaries are all in TimeBack Dash.</p>
+    </div>
+
+    <div class="sub">
+      <h3>Supporting Platforms</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Platform</th><th>What it's for</th><th>Login</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alphalearn Admin</td><td>Inspect student course assignments and skill-level content</td><td>alpha.school / 2hourlearning email</td></tr>
+            <tr><td>Alphatest Admin</td><td>View all completed tests per student</td><td>alpha.school / 2hourlearning email</td></tr>
+            <tr><td>Test Out Sheet</td><td>Shared tracker for all test completions and next-step assignments — check daily</td><td>Google Sheets (shared link)</td></tr>
+            <tr><td>QuickSight Dashboards</td><td>Student Progress Tracker · System Failure Tracker · Student Deep Dives</td><td>Request own account</td></tr>
+            <tr><td>StudyReel</td><td>Student session recordings</td><td>Crossover application email</td></tr>
+            <tr><td>TimeBack MCP</td><td>AI data assistant — pull real student data into Claude for analysis</td><td>Request from Zeb Hardy</td></tr>
+            <tr><td>AlphaTest</td><td>Internal testing platform — admin access required</td><td>alpha.school / 2hourlearning email</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>Escalation Directory</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Category</th><th>Contact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Student-facing automation failures (missing plans, wrong enrolments, tests not assigned)</td><td>BeyondAI</td></tr>
+            <tr><td>Dashboard issues (Missing Assignment Detection, Deep Dives, System Failure Tracker)</td><td>BeyondAI / Guilherme Colombo</td></tr>
+            <tr><td>Reporting and data pipelines</td><td>SuperBuilders / Sanjay Karinje</td></tr>
+            <tr><td>Coaching admin automation (session docs, scheduling, recording uploads)</td><td>SuperBuilders / Benjamin Vizy</td></tr>
+            <tr><td>TimeBack MCP (data accuracy, access, filtering)</td><td>Zeb Hardy (zeb.hardy@alpha.school)</td></tr>
+            <tr><td>AlphaTest / content creation tooling</td><td>BeyondAI / Guilherme Colombo</td></tr>
+            <tr><td>Subject-specific curriculum questions</td><td>Subject DRI / Head of Curriculum</td></tr>
+            <tr><td>General dashboard questions</td><td>Academics Team chat / Head of Academic Ops</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <div class="callout-icon">⚠</div>
+      <div class="callout-body">
+        <strong>General Principle</strong>
+        <p>Always verify by checking the student's actual experience — impersonate in TimeBack and check the app directly. Never rely on the dashboard alone.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 STUDENT JOURNEY -->
+  <div class="section" id="journey">
+    <div class="section-label">
+      <div class="section-num">02</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Timeback</div>
+        <div class="section-title">The Student Journey</div>
+      </div>
+    </div>
+    <p>Understanding where a student is in the system is your first step before any intervention. Every student follows the same path — your job is to know exactly where they are at any moment.</p>
+
+    <div class="sub">
+      <h3>Onboarding → First Test</h3>
+      <p>Students start by completing their MAP tests (handled by Thiago De Sa and Guilherme Colombo). Once MAPs are done, students receive their first test per subject:</p>
+      <ul>
+        <li>Below 6th grade age-grade → starts with the <strong>Kinder (K) test</strong></li>
+        <li>6th grade or above → starts with the <strong>3rd grade test</strong></li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3>Bracketing Logic</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Score</th><th>Next Step</th></tr></thead>
+          <tbody>
+            <tr><td>Below 60% (below 80% for K–3 Math)</td><td>Full skill plan</td></tr>
+            <tr><td>60–90%</td><td>Hole filling</td></tr>
+            <tr><td>Over 90%</td><td>Next grade test</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout teal">
+        <div class="callout-icon">ℹ</div>
+        <div class="callout-body">
+          <strong>First Test Exception</strong>
+          <p>If the student's first test is not a Kinder test and they fail it, they receive a Kinder test next before entering the normal path. This applies to the first test only.<br><em>Example: Student's first test is 3rd grade, they get 80% → next they get a Kinder test, then proceed upward.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>What to Check Daily</h3>
+      <h4>Test Out Sheet</h4>
+      <ul>
+        <li>Score below 90%? → Confirm hole filling or full plan was assigned. If not → contact the Curriculum DRI.</li>
+        <li>Score over 90%? → Confirm the next grade test was assigned. If not → request via the test out sheet.</li>
+      </ul>
+      <h4>Reading Tests</h4>
+      <ul>
+        <li>Reading is an exception. 100-for-100 students get <strong>3 attempts</strong> at the reading test.</li>
+        <li>3 failed attempts → evaluate for MobyMax Reading or AlphaRead. Confirm with Aleksandra Wrega (Alex).</li>
+        <li>HS students (age-grade 9–12) placed on Grades 3–8 AlphaRead → reach out to Alex to manually lower AlphaRead level to their rostered grade.</li>
+        <li>Student below 60% on Grade K, 1, or 2 reading test → request a Lalilo account from Nick Alsford.</li>
+      </ul>
+      <h4>Plan / Hole Filling Completion</h4>
+      <ul>
+        <li>Most is automated. You will receive requests from students who've run out of content.</li>
+        <li>Check their TimeBack and apps. If content is genuinely missing → contact the Curriculum DRI to assign more.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 03 DAILY MONITORING -->
+  <div class="section" id="monitoring">
+    <div class="section-label">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Every Morning</div>
+        <div class="section-title">Daily Monitoring Routine</div>
+      </div>
+    </div>
+
+    <ol class="step-list">
+      <li><strong>Open TimeBack Dash.</strong> Review all assigned students. Flag anyone where XP or time on task is significantly below expected, test attempts are stacking without a pass (doom loop), or there is no activity in 24+ hours on a school day.</li>
+      <li><strong>Cross-reference with QuickSight.</strong> For any flagged student, open the Student Deep Dives Dashboard. Look for grade-level progress stall (no advancement in 2+ weeks), retake patterns on the same content, and Missing Assignment Detection flags.</li>
+      <li><strong>Check the System Failure Tracker.</strong> Are there any system failures affecting your campus? Missing plans, wrong enrolments, tests not assigned? Log and escalate to BeyondAI before the student's session starts.</li>
+      <li><strong>Review the Test Out Sheet.</strong> Were any tests completed yesterday? Did automation fire the correct next step?</li>
+      <li><strong>Flag and act.</strong> System issue → escalate immediately. Learning issue or anti-pattern → queue a coaching session or notify the guide. Doom loop → run or assign a targeted session focused on the blocking skill.</li>
+    </ol>
+
+    <div class="sub">
+      <h3>Anti-Patterns to Watch</h3>
+      <p>These behaviours look productive but do not lead to actual learning. Campus DRIs catch them at the data level — before the student or guide notices.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Anti-Pattern</th><th>What It Looks Like in TimeBack</th></tr></thead>
+          <tbody>
+            <tr><td>Rushing through content</td><td>Short session times relative to XP earned; high attempt rate with low dwell time</td></tr>
+            <tr><td>Skipping explanations after errors</td><td>Wrong answer followed immediately by next attempt with no dwell time on explanation</td></tr>
+            <tr><td>Guessing / clicking through</td><td>Very short response times across many questions; high attempt count, low accuracy</td></tr>
+            <tr><td>Skipping instructional material</td><td>Quiz attempts with no lesson view beforehand</td></tr>
+            <tr><td>Idling / off-task</td><td>Long gaps of inactivity mid-session; session time logged without activity</td></tr>
+            <tr><td>Gaming the system</td><td>Retaking easy/already-mastered content for XP; cycling low-level content repeatedly</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout coral">
+        <div class="callout-icon">→</div>
+        <div class="callout-body">
+          <strong>When you spot an anti-pattern</strong>
+          <p>Note it in the student's Notes tab in TimeBack Dash → Flag the guide in Slack with the specific data point → Book or recommend a coaching session → If the pattern repeats, escalate to the Subject DRI and flag in the weekly report.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 COACHING -->
+  <div class="section" id="coaching">
+    <div class="section-label">
+      <div class="section-num">04</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Sessions</div>
+        <div class="section-title">Coaching</div>
+      </div>
+    </div>
+
+    <p>As Campus DRI you run <strong>all call types</strong> — pre-test, post-test, and academic coaching — across all subjects. Coaching certification: contact Himanshi Goyal (himanshi.goyal@alpha.school) and Fiorella Mendez (fiorella.mendez@alpha.school).</p>
+
+    <div class="sub">
+      <h3>Before the Session</h3>
+      <div class="callout coral">
+        <div class="callout-icon">!</div>
+        <div class="callout-body">
+          <strong>Student Email Verification — Mandatory</strong>
+          <p>Check your Google Calendar for delivery failure notifications before every call. Verify the student's email from the Data Tab in the Coaching Tracker. If email bounced: send a new invite CC-ing the guide/parent using the template below.</p>
+        </div>
+      </div>
+
+      <h4>Email Template — Incorrect Email on File</h4>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin-bottom:16px;font-size:0.85rem;line-height:1.7;color:var(--ink-soft);">
+        <strong style="color:var(--ink);">Subject:</strong> [Type of] Coaching – [Subject]<br><br>
+        Hi [Student Name],<br><br>
+        I hope you're doing well! I noticed that the calendar invitation for your upcoming coaching session did not reach you due to an incorrect email address on file. I apologise for any inconvenience this may have caused.<br><br>
+        Please find the session link below for easy access: [Insert Link]<br><br>
+        Should you have any questions or difficulty joining, please don't hesitate to reach out. The call is at [09:00 AM CT].<br><br>
+        Looking forward to our session!<br>
+        Warm regards,<br>
+        [Coach Name] — Academic Coach
+      </div>
+
+      <h4>Pre-Session Checklist</h4>
+      <ul class="checklist">
+        <li>Stable internet connection confirmed</li>
+        <li>Google Meet audio, video, and screen sharing tested</li>
+        <li>Recording enabled — set to auto-join and record</li>
+        <li>Professional background, appearance, and name display</li>
+        <li>Quiet space, free of distractions</li>
+        <li>TimeBack Dash open — student's current skill/lesson located</li>
+        <li>Instructional video or article for that skill reviewed</li>
+        <li>Prior coaching notes or session history checked if available</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3>During the Session — The LIFT Framework</h3>
+      <div class="lift-grid">
+        <div class="lift-card">
+          <div class="lift-letter">L</div>
+          <div class="lift-name">Locate the Block</div>
+          <div class="lift-desc">Use powerful questions to find the root cause — not just the symptom. Ask "Where exactly does it break down for you?" before offering any support.</div>
+        </div>
+        <div class="lift-card">
+          <div class="lift-letter">I</div>
+          <div class="lift-name">Illuminate the Path</div>
+          <div class="lift-desc">Guide the student to discover the solution through leading questions, analogies, and worked examples. The coach narrates thinking, not answers.</div>
+        </div>
+        <div class="lift-card">
+          <div class="lift-letter">F</div>
+          <div class="lift-name">Foster Independence</div>
+          <div class="lift-desc">Encourage the student to attempt the next problem independently. Coach observes, resists the urge to intervene, and celebrates the attempt.</div>
+        </div>
+        <div class="lift-card">
+          <div class="lift-letter">T</div>
+          <div class="lift-name">Transfer Ownership</div>
+          <div class="lift-desc">Close with a student-led summary: "Explain back to me what you'd do next time." Building metacognitive habits that outlast any single session.</div>
+        </div>
+      </div>
+
+      <div class="callout navy">
+        <div class="callout-icon">★</div>
+        <div class="callout-body">
+          <strong>Two Critical Goals of Every Session</strong>
+          <p><strong style="color:#fff;">Unblock the student</strong> — correct the misunderstanding behind the skill they're struggling with.<br><strong style="color:#fff;">Build their independence</strong> — teach them to use in-app resources so they can master future skills on their own.</p>
+        </div>
+      </div>
+
+      <h4>Coaching Rules</h4>
+      <ul>
+        <li>Use only <strong>leading questions</strong> — never give the answer directly</li>
+        <li>In Math: follow the lesson's prescribed method; do not teach your own approach</li>
+        <li>Reduce help as the session progresses → end with zero support on the final questions</li>
+        <li>Tailor to the error type: <strong>Conceptual</strong> (misunderstanding the idea) · <strong>Procedural</strong> (wrong steps) · <strong>Careless</strong> (misreading)</li>
+        <li>Watch for uncertainty signals ("I guess," "is this the step?") → slow down, ask for a confidence rating</li>
+        <li>If the student doesn't arrive: wait 5 min → ping guide in <strong>#guides-and-coaches-2hourlearning</strong> → wait 5 more min → mark absent and end call</li>
+      </ul>
+
+      <div class="callout coral">
+        <div class="callout-icon">!</div>
+        <div class="callout-body">
+          <strong>Non-Negotiable</strong>
+          <p>The student must complete the last few questions with zero support. Mastery only counts if the student can demonstrate it independently.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>After the Session</h3>
+      <ol class="step-list">
+        <li>Open the <strong>Coaching Tracker 2026–27</strong> and find your Data Sheet (DS).</li>
+        <li>If no matching DS: make a copy of the DS template — <em>"Academic Coaching DS: Student - mm/dd/yyyy - Subject"</em> — fill it in, give edit access to "Alpha," and paste the DS URL in Column A.</li>
+        <li>If the student continues to struggle or you notice missing prerequisites → tag the Campus DRI and Subject DRI in the DS.</li>
+        <li>Complete <strong>Row 16 (Blocker)</strong> and <strong>Row 17 (Reasoning)</strong> — these must match.</li>
+      </ol>
+      <div class="callout gold">
+        <div class="callout-icon">⚠</div>
+        <div class="callout-body">
+          <strong>Documentation Rules</strong>
+          <p>Do not convert links into placeholders — paste as-is. Recordings must be a Zoom or Drive link only. Read.ai links must never be pasted in the tracker. If no coaching was done (parent query call, tech issues) → add the DS to the "No Academic Coaching" tab.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>Blocker Field Guide — Row 16</h3>
+      <p>This data is how the team finds and fixes gaps in the system. Row 17 must always match Row 16.</p>
+      <div class="blocker-grid">
+        <div class="blocker-row">
+          <div class="blocker-label">Blocker</div>
+          <div class="blocker-desc">When to use it</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">Missing Instruction</div>
+          <div class="blocker-desc">Instruction that should exist simply doesn't. A concept was never taught, a video/text is missing, or a learning resource is genuinely absent.</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">Faulty Instruction</div>
+          <div class="blocker-desc">The content or instructions given were incorrect, confusing, or misleading — actively wrong in a way that caused the confusion.</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">Prerequisites</div>
+          <div class="blocker-desc">The student hasn't learned the foundational skills needed for this lesson. Content is fine — student just isn't ready for it yet.</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">Placement Failure</div>
+          <div class="blocker-desc">The student was placed at the wrong level — too easy or too hard. The mismatch itself caused the issue, not the content quality.</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">Too Large a Conceptual Leap</div>
+          <div class="blocker-desc">Instruction exists and is correct, but the jump between what the student knew and what they were asked to do was too big.</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">Other</div>
+          <div class="blocker-desc">Doesn't fit any above. Use Row 17 to explain clearly. Covers app UI/navigation issues, coachable student behaviour anti-patterns, or unique situations.</div>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-label">None</div>
+          <div class="blocker-desc">No meaningful blocker — the student resolved the issue on their own. Should be the exception, not the default.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 ESCALATION -->
+  <div class="section" id="escalation">
+    <div class="section-label">
+      <div class="section-num">05</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Contacts</div>
+        <div class="section-title">Always / Never & Evaluation</div>
+      </div>
+    </div>
+
+    <div class="an-grid">
+      <div class="an-box always">
+        <h4>✓ Always</h4>
+        <ul>
+          <li>Be calm, polite, patient, and encouraging</li>
+          <li>Guide using leading questions only</li>
+          <li>Encourage students to use in-app tools</li>
+          <li>Gradually reduce help toward full independence</li>
+          <li>Point out and correct misconceptions</li>
+          <li>Adapt to the student's individual needs</li>
+          <li>Celebrate wins</li>
+          <li>Document every session the same day</li>
+          <li>Escalate system issues — never absorb them silently</li>
+        </ul>
+      </div>
+      <div class="an-box never">
+        <h4>✗ Never</h4>
+        <ul>
+          <li>Give away answers (except worked examples)</li>
+          <li>Interrupt a student's thought process</li>
+          <li>Help while the student is working independently</li>
+          <li>Lecture — if you must explain, make it a conversation</li>
+          <li>Drag out the session unnecessarily</li>
+          <li>Leave Row 16 blank or mismatched with Row 17</li>
+          <li>Mark a system issue as "None" — escalate it</li>
+          <li>Wait more than 24 hrs to document a session</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>Session Quality Thresholds</h3>
+      <div class="table-wrap">
+        <table class="perf-row">
+          <thead><tr><th>Average Score</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>8.5–10</td><td><span class="badge green">Strong — keep going</span></td></tr>
+            <tr><td>7.0–8.4</td><td><span class="badge teal">Good — minor areas to sharpen</span></td></tr>
+            <tr><td>5.0–6.9</td><td><span class="badge gold">Needs attention — coaching conversation initiated</span></td></tr>
+            <tr><td>Below 5.0</td><td><span class="badge red">Concern — session review and support required</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 FAQ -->
+  <div class="section" id="faq">
+    <div class="section-label">
+      <div class="section-num">06</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">TimeBack-Specific</div>
+        <div class="section-title">Common Situations & FAQ</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">There are no recommendations available for a student</div>
+      <div class="faq-a">
+        <ul>
+          <li><strong>Just completed a test:</strong> Recommendations run once a day. Knowledge gaps will appear the next day.</li>
+          <li><strong>Just completed their knowledge gaps:</strong> Check DeepDive Dash for when the last lesson was completed. More content will appear the next cycle.</li>
+          <li><strong>No reading content, rostered in K–2:</strong> They may need a Lalilo account. Reach out to Nick Alsford.</li>
+          <li><strong>None of the above:</strong> Immediate support ticket.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">MobyMax — no recommendations available</div>
+      <div class="faq-a">
+        Check the student's MobyMax link and order by latest completed. Confirm if lessons were completed with over 80%. If not automatically reassigned within 15 min, reassign manually:
+        <ul>
+          <li>Open the student's MobyMax link → find the course to reassign (e.g., Language HF)</li>
+          <li>Sort lessons by accuracy → select all lessons below 80%</li>
+          <li>Click "Assign Remediation Skills" → name it "Reassign Hole-Filling. [Subject] [Student Name]"</li>
+          <li>Wait 15 minutes before doing this manually — always prefer automation.</li>
+        </ul>
+        <strong>Freckle (Language specifically):</strong> Check the student's Freckle account. If empty, ping Barbara Franks.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The student wants to test out of their grade</div>
+      <div class="faq-a">
+        <ul>
+          <li><strong>Doing knowledge gaps:</strong> Explain that knowledge gaps must be completed before a new test is assigned.</li>
+          <li><strong>Rostered, scored below 60%:</strong> Explain the student has many gaps and would benefit from the full plan. Confirm with Curriculum DRI before making any change.</li>
+          <li><strong>Rostered in K–3 Math, scored 60–80%:</strong> Discuss with the DRI whether to use Zearn placements from G3 or move forward in Zearn missions (K–2).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The student is getting repeated lessons</div>
+      <div class="faq-a">
+        <ul>
+          <li><strong>Full plan:</strong> Check if all lessons for that grade were completed — there may have been a bug that reassigned the plan from the start.</li>
+          <li><strong>Knowledge gaps:</strong> If they get a repeated lesson after a test, it usually means they failed the same type of lesson again in the test.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The student has the test in TimeBack but not in Alphatest</div>
+      <div class="faq-a">Usually means the test was marked as absent. Double-check in Alphatest and open a support ticket to reassign the test.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The student is rostered but failed the test on purpose</div>
+      <div class="faq-a">Go to Guilherme Colombo / Thiago De Sa and ask for a test to be manually added. These students must be tracked separately.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">HS student placed on Grades 3–8 AlphaRead</div>
+      <div class="faq-a">If a student's age-grade is 9–12 and they are placed on Grades 3–8 AlphaRead, reach out to Aleksandra Wrega (Alex) to manually lower the AlphaRead level to the grade they were rostered on.</div>
+    </div>
+  </div>
+
+  <!-- 07 HIGH-MILEAGE QUESTIONS -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num">07</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Appendix</div>
+        <div class="section-title">High-Mileage Questions</div>
+      </div>
+    </div>
+    <p>Use these during sessions to diagnose blockers and unlock student thinking. Match the question set to the situation — don't cycle through all of them.</p>
+
+    <div class="q-group">
+      <div class="q-group-label">Missing Instruction</div>
+      <ul class="q-list">
+        <li>What do you feel like you needed to know before this that you didn't?</li>
+        <li>Is there a step that feels like it came out of nowhere?</li>
+        <li>What would have made this make sense from the beginning?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-label">Prerequisites</div>
+      <ul class="q-list">
+        <li>Where was the last place this felt easy for you?</li>
+        <li>Can you do [simpler version]? Let's start there.</li>
+        <li>What part of this feels familiar and what part feels completely new?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-label">Too Large a Conceptual Leap</div>
+      <ul class="q-list">
+        <li>What part is confusing to you?</li>
+        <li>Can you tell me what you DO understand so far?</li>
+        <li>What's the first place it stopped making sense?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-label">Mindset / Fixed Mindset</div>
+      <ul class="q-list">
+        <li>What would you try if you knew you couldn't fail?</li>
+        <li>Has there been something else that felt impossible at first that you figured out?</li>
+        <li>What's one small thing you do understand about this?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-label">Learned Helplessness</div>
+      <ul class="q-list">
+        <li>Before I say anything, what's one thing you could try?</li>
+        <li>What have you already attempted?</li>
+        <li>If I wasn't here, what would your first move be?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-label">Disengagement</div>
+      <ul class="q-list">
+        <li>What would make this feel worth your time?</li>
+        <li>Where do you see this connecting to something you really care about?</li>
+        <li>What would make this more interesting to you right now?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-label">Dysregulated / Emotionally Blocked</div>
+      <ul class="q-list">
+        <li>What would help you feel ready to work on this right now?</li>
+        <li>On a scale of 1–10, how focused do you feel today?</li>
+        <li>What do you need before we start?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="credo">
+    <blockquote>"The best coaches don't clip wings. They don't even teach students to fly. They make students believe their sky is limitless."</blockquote>
+    <cite>— Alpha Coaching Credo, 2026</cite>
+  </div>
+
+</div>
+
+<footer>
+  Alpha · Academic Operations · Campus DRI Playbook 2026–27 · Owner: Bruna Rodrigues
+</footer>
+
+</body>
+</html>
