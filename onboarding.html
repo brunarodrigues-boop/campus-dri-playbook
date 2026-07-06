@@ -117,6 +117,12 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
 .dt tr:nth-child(even) td{background:#f6f9fb;}
 .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy-900);color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .2s ease;box-shadow:0 8px 24px rgba(0,0,0,0.25);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;gap:14px;}
+.empty-state .es-icon{width:56px;height:56px;border-radius:16px;background:var(--slate-100);display:flex;align-items:center;justify-content:center;}
+.empty-state .es-icon svg{width:26px;height:26px;color:var(--slate-400);}
+.empty-state h2{font-size:22px;margin:0;color:var(--slate-900);}
+.empty-state p{font-size:13.5px;color:var(--slate-500);margin:0;max-width:360px;line-height:1.6;}
+.empty-state .es-tag{display:inline-block;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:700;letter-spacing:.6px;padding:4px 12px;border-radius:20px;}
 </style>
 </head>
 <body>
@@ -135,41 +141,41 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
       <span>Dashboard</span>
     </button>
 
-    <div class="section-label" id="lbl-p1" onclick="toggleSection('p1')">
+    <div class="section-label nav-phases" id="lbl-p1" onclick="toggleSection('p1')">
       <span>PHASE 1 &middot; ACCESS</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
     </div>
-    <div class="section-body" id="sec-p1">
-      <button class="nav-item" onclick="showView('accounts')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Accounts &amp; Access</span></button>
-      <button class="nav-item" onclick="showView('monitoring')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Monitoring Platforms</span></button>
-      <button class="nav-item" onclick="showView('dashboards')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg><span>Data &amp; Dashboards</span></button>
-      <button class="nav-item" onclick="showView('content-platforms')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Content &amp; Testing</span></button>
-      <button class="nav-item" onclick="showView('api-access')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>API &amp; MCP Access</span></button>
-      <button class="nav-item" onclick="showView('company-context')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg><span>Company Context</span></button>
+    <div class="section-body nav-phases" id="sec-p1">
+      <button class="nav-item" data-view="accounts" onclick="showView('accounts')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Accounts &amp; Access</span></button>
+      <button class="nav-item" data-view="monitoring" onclick="showView('monitoring')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Monitoring Platforms</span></button>
+      <button class="nav-item" data-view="dashboards" onclick="showView('dashboards')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg><span>Data &amp; Dashboards</span></button>
+      <button class="nav-item" data-view="content-platforms" onclick="showView('content-platforms')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Content &amp; Testing</span></button>
+      <button class="nav-item" data-view="api-access" onclick="showView('api-access')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>API &amp; MCP Access</span></button>
+      <button class="nav-item" data-view="company-context" onclick="showView('company-context')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg><span>Company Context</span></button>
     </div>
 
-    <div class="section-label" id="lbl-p2" onclick="toggleSection('p2')">
+    <div class="section-label nav-phases" id="lbl-p2" onclick="toggleSection('p2')">
       <span>PHASE 2 &middot; SKILLS</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
     </div>
-    <div class="section-body" id="sec-p2">
-      <button class="nav-item" onclick="showView('learning-science')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Learning Science</span></button>
-      <button class="nav-item" onclick="showView('antipatterns')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Anti-Patterns</span></button>
-      <button class="nav-item" onclick="showView('coaching-exp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Coaching Expectations</span></button>
-      <button class="nav-item" onclick="showView('ramp-up')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Ramp-Up Task</span></button>
-      <button class="nav-item dri-only" onclick="showView('deep-dive')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Deep Dive Process</span></button>
+    <div class="section-body nav-phases" id="sec-p2">
+      <button class="nav-item" data-view="learning-science" onclick="showView('learning-science')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Learning Science</span></button>
+      <button class="nav-item" data-view="antipatterns" onclick="showView('antipatterns')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Anti-Patterns</span></button>
+      <button class="nav-item" data-view="coaching-exp" onclick="showView('coaching-exp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Coaching Expectations</span></button>
+      <button class="nav-item" data-view="ramp-up" onclick="showView('ramp-up')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Ramp-Up Task</span></button>
+      <button class="nav-item dri-only" data-view="deep-dive" onclick="showView('deep-dive')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Deep Dive Process</span></button>
     </div>
 
-    <div class="section-label" id="lbl-p3" onclick="toggleSection('p3')">
+    <div class="section-label nav-phases" id="lbl-p3" onclick="toggleSection('p3')">
       <span>PHASE 3 &middot; AUTOMATION</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
     </div>
-    <div class="section-body" id="sec-p3">
-      <button class="nav-item" onclick="showView('automation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><span>Automation Landscape</span></button>
-      <button class="nav-item" onclick="showView('escalation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg><span>Escalation Directory</span></button>
-      <button class="nav-item dri-only" onclick="showView('triangle-eval')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 20 2 20"/></svg><span>Triangle Evaluation</span></button>
-      <button class="nav-item dri-only" onclick="showView('daily-routine')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Daily Routine</span></button>
-      <button class="nav-item" onclick="showView('next-steps')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Next Steps</span></button>
+    <div class="section-body nav-phases" id="sec-p3">
+      <button class="nav-item" data-view="automation" onclick="showView('automation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><span>Automation Landscape</span></button>
+      <button class="nav-item" data-view="escalation" onclick="showView('escalation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg><span>Escalation Directory</span></button>
+      <button class="nav-item dri-only" data-view="triangle-eval" onclick="showView('triangle-eval')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 20 2 20"/></svg><span>Triangle Evaluation</span></button>
+      <button class="nav-item dri-only" data-view="daily-routine" onclick="showView('daily-routine')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Daily Routine</span></button>
+      <button class="nav-item" data-view="next-steps" onclick="showView('next-steps')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Next Steps</span></button>
     </div>
   </div>
   <div class="sidebar-footer">
@@ -538,6 +544,16 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
   <div class="callout"><strong>Questions or issues?</strong> If you run into any issues or have any suggestions about the onboarding process, don&rsquo;t hesitate to reach out. We look forward to working with you.</div>
 </div>
 
+<!-- COACHING EMPTY STATE -->
+<div id="view-coaching-empty" class="hidden">
+  <div class="empty-state">
+    <div class="es-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <span class="es-tag">COACHING</span>
+    <h2>Content coming soon</h2>
+    <p>Coaching-specific onboarding materials are being built out. Check back for updates.</p>
+  </div>
+</div>
+
 </div></main></div>
 <div class="toast" id="toast">Complete earlier steps to unlock this.</div>
 <script>
@@ -546,7 +562,9 @@ function showView(name){
   var el=document.getElementById('view-'+name);
   if(el)el.classList.remove('hidden');
   document.querySelectorAll('.nav-item').forEach(function(b){b.classList.remove('active');});
-  if(name==='dashboard')document.getElementById('nav-dashboard').classList.add('active');
+  var match=document.querySelector('.nav-item[data-view="'+name+'"]');
+  if(match)match.classList.add('active');
+  else if(name==='dashboard')document.getElementById('nav-dashboard').classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
 function switchRole(role){
@@ -554,10 +572,8 @@ function switchRole(role){
   document.getElementById('btn-coaching').classList.toggle('active',role==='coaching');
   document.getElementById('footer-role').textContent=role==='dri'?'Campus DRI':'Coaching';
   document.querySelectorAll('.dri-only').forEach(function(el){el.classList.toggle('hidden',role!=='dri');});
-  document.getElementById('welcome-sub').innerHTML=role==='dri'
-    ?'You are joining as <strong>Campus DRI / Learning Analyst</strong>. This onboarding program will guide your first weeks. Please read it carefully and refer back to it as you progress through each phase.'
-    :'You are joining the <strong>Academics team</strong>. This onboarding program will guide your first weeks. Please read it carefully and refer back to it as you progress through each phase.';
-  showView('dashboard');
+  document.querySelectorAll('.nav-phases').forEach(function(el){el.classList.toggle('hidden',role!=='dri');});
+  showView(role==='dri'?'dashboard':'coaching-empty');
 }
 function toggleJourney(){
   document.getElementById('journey-head').classList.toggle('open');
