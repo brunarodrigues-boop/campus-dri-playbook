@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Onboarding | Alpha School</title>
+<style>
+:root{
+  --navy-900:#0d1826;--navy-800:#122236;
+  --cyan-400:#38bdf8;--cyan-500:#0ea5e9;--cyan-600:#0284c7;
+  --slate-900:#0f172a;--slate-700:#334155;--slate-600:#475569;
+  --slate-500:#64748b;--slate-400:#94a3b8;--slate-300:#cbd5e1;
+  --slate-200:#e2e8f0;--slate-100:#f1f5f9;
+  --green-600:#65a30d;--green-50:#f4faec;
+  --orange-500:#f97316;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--slate-900);background:#f4f8fb;}
+.app{display:flex;min-height:100vh;}
+.sidebar{width:220px;flex-shrink:0;background:radial-gradient(circle at 0% 0%,#1a2a3a 0%,var(--navy-900) 35%),var(--navy-900);color:#fff;display:flex;flex-direction:column;padding:22px 14px;position:sticky;top:0;height:100vh;}
+.brand{padding:2px 10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:8px;}
+.brand h1{font-size:17px;margin:0;font-weight:800;letter-spacing:-0.3px;}
+.brand p{margin:2px 0 0;font-size:10px;letter-spacing:1px;color:var(--slate-400);font-weight:600;}
+.role-switcher{display:flex;background:rgba(255,255,255,0.07);border-radius:10px;padding:3px;margin:0 0 12px 0;gap:2px;}
+.role-btn{flex:1;padding:7px 4px;border:none;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.3px;cursor:pointer;color:var(--slate-400);background:transparent;transition:all .15s ease;text-align:center;}
+.role-btn.active{background:var(--cyan-500);color:#fff;box-shadow:0 2px 6px rgba(14,165,233,0.35);}
+.nav-scroll{flex:1;overflow-y:auto;padding-right:2px;}
+.nav-scroll::-webkit-scrollbar{width:4px;}
+.nav-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:4px;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:8px 10px;margin:2px 0;border-radius:10px;font-size:13px;font-weight:600;color:#e2e8f0;cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:background .15s ease;}
+.nav-item svg{flex-shrink:0;width:15px;height:15px;}
+.nav-item:hover{background:rgba(255,255,255,0.06);}
+.nav-item.active{background:rgba(56,189,248,0.16);color:var(--cyan-400);}
+.section-label{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--slate-500);margin:16px 10px 5px;cursor:pointer;user-select:none;}
+.section-label svg{width:12px;height:12px;transition:transform .15s ease;}
+.section-label.collapsed svg{transform:rotate(-90deg);}
+.section-body{overflow:hidden;max-height:1000px;transition:max-height .2s ease;}
+.section-body.collapsed{max-height:0;}
+.sidebar-footer{border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:10px;display:flex;align-items:center;gap:10px;}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#0284c7);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.sidebar-footer .who{flex:1;line-height:1.2;}
+.sidebar-footer .who .name{font-size:13px;font-weight:700;}
+.sidebar-footer .who .role-lbl{font-size:11px;color:var(--slate-500);}
+.main{flex:1;background:radial-gradient(700px 300px at -5% -10%,rgba(251,191,150,0.16),transparent 60%),radial-gradient(900px 500px at 110% 0%,rgba(125,211,252,0.18),transparent 55%),#f6f9fc;padding:36px 44px 60px;min-height:100vh;}
+.container{max-width:900px;margin:0 auto;}
+.hidden{display:none;}
+.banner{background:linear-gradient(120deg,#e5f1fb,#eef7fb 60%,#f3f8fb);border-radius:18px;padding:26px 30px;display:flex;gap:18px;margin-bottom:34px;border:1px solid #dceaf5;}
+.banner .icon-circle{width:44px;height:44px;border-radius:50%;background:#cfe8fb;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.banner .icon-circle svg{width:20px;height:20px;color:var(--cyan-600);}
+.banner .eyebrow{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--cyan-600);margin:0 0 4px;}
+.banner h2{font-size:22px;margin:0 0 8px;color:var(--slate-900);}
+.banner p{margin:0 0 14px;font-size:13px;color:var(--slate-600);line-height:1.5;max-width:640px;}
+.progress-row{display:flex;align-items:center;gap:8px;}
+.progress-seg{height:6px;flex:1;background:#d5e6f4;border-radius:4px;overflow:hidden;}
+.progress-seg span{display:block;height:100%;width:0%;background:var(--cyan-500);}
+.progress-count{font-size:12px;font-weight:700;color:var(--cyan-600);white-space:nowrap;}
+.welcome h1{font-size:24px;margin:0 0 4px;}
+.welcome p{margin:0 0 24px;font-size:13px;color:var(--slate-600);}
+.card{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:26px 30px 30px;margin-bottom:26px;box-shadow:0 1px 2px rgba(15,23,42,0.03);}
+.card-head{display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.card-head .label{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--cyan-600);}
+.card-head .label svg{width:14px;height:14px;}
+.card-head svg.chev{width:16px;height:16px;color:var(--slate-400);transition:transform .2s ease;}
+.card-head.open svg.chev{transform:rotate(180deg);}
+.card h2.title{font-size:20px;margin:14px 0 4px;}
+.card .sub{font-size:13px;color:var(--slate-500);margin:0 0 22px;}
+.journey-body{overflow:hidden;max-height:4000px;transition:max-height .3s ease;}
+.journey-body.collapsed{max-height:0;}
+.phase{display:flex;gap:14px;padding:18px 0;}
+.phase+.phase{border-top:1px solid var(--slate-200);}
+.phase .picon{width:34px;height:34px;border-radius:9px;background:var(--slate-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.phase .picon svg{width:17px;height:17px;color:var(--cyan-600);}
+.phase-content{flex:1;}
+.ph-eyebrow{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--cyan-600);margin:0 0 2px;}
+.phase h3{font-size:15px;margin:2px 0 10px;}
+.phase h3 .meta{font-size:12px;font-weight:400;color:var(--slate-500);}
+.sub-label{font-size:10px;font-weight:700;letter-spacing:.6px;color:var(--slate-500);margin:12px 0 5px;}
+.phase ul{list-style:none;margin:0 0 4px;padding:0;}
+.phase li{position:relative;padding-left:14px;font-size:13px;color:var(--slate-700);line-height:1.6;}
+.phase li::before{content:"";position:absolute;left:0;top:9px;width:4px;height:4px;border-radius:50%;background:var(--slate-400);}
+.success-note{margin-top:12px;background:var(--green-50);color:var(--green-600);font-size:12px;font-weight:600;padding:10px 14px;border-radius:10px;}
+.section-title{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--slate-500);margin:24px 0 10px 2px;}
+.today-card{background:#fff;border:1px solid var(--slate-200);border-left:4px solid var(--cyan-500);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:box-shadow .15s ease;margin-bottom:26px;}
+.today-card:hover{box-shadow:0 4px 14px rgba(15,23,42,0.07);}
+.today-card .ticon{width:38px;height:38px;border-radius:10px;background:#e5f4fd;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.today-card .ticon svg{width:18px;height:18px;color:var(--cyan-600);}
+.today-card .tcontent{flex:1;}
+.today-card .t1{font-size:15px;font-weight:700;}
+.today-card .t2{font-size:12px;color:var(--slate-500);}
+.today-card svg.arrow{width:16px;height:16px;color:var(--slate-400);}
+.upcoming{display:flex;flex-direction:column;gap:10px;}
+.upcoming-card{background:#fbfcfd;border:1px solid var(--slate-200);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;}
+.upcoming-card .licon{width:34px;height:34px;border-radius:10px;background:var(--slate-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.upcoming-card .licon svg{width:16px;height:16px;color:var(--slate-400);}
+.upcoming-card .t1{font-size:14px;font-weight:700;color:var(--slate-500);}
+.upcoming-card .t2{font-size:12px;color:var(--slate-400);}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--cyan-600);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:18px;}
+.back-link svg{width:14px;height:14px;}
+.module-hero{background:linear-gradient(135deg,#1a3a4a,#0d1826);border-radius:18px;padding:36px 30px;color:#fff;margin-bottom:26px;}
+.module-hero .tag{display:inline-block;background:rgba(255,255,255,0.14);padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.8px;margin-bottom:12px;}
+.module-hero h2{font-size:24px;margin:0 0 8px;}
+.module-hero p{margin:0;color:#cbd8e0;font-size:13px;line-height:1.5;}
+.content-section{margin-bottom:28px;}
+.content-section h3{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--slate-500);text-transform:uppercase;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid var(--slate-200);}
+.info-card{background:#fff;border:1px solid var(--slate-200);border-radius:12px;padding:18px 22px;margin-bottom:10px;}
+.info-card h4{font-size:14px;font-weight:700;margin:0 0 6px;color:var(--slate-900);}
+.info-card p{font-size:13px;color:var(--slate-600);margin:0 0 6px;line-height:1.5;}
+.info-card ul{margin:6px 0 0;padding-left:18px;}
+.info-card li{font-size:13px;color:var(--slate-600);line-height:1.6;margin-bottom:3px;}
+.callout{background:#e8f4f3;border-left:4px solid var(--cyan-600);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:13px;color:var(--slate-700);line-height:1.5;}
+.callout strong{color:var(--cyan-600);}
+.callout-orange{background:#fff7ed;border-left:4px solid var(--orange-500);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:13px;color:var(--slate-700);line-height:1.5;}
+.data-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+.data-table th{background:var(--navy-900);color:#fff;padding:9px 14px;text-align:left;font-size:11px;letter-spacing:.5px;}
+.data-table td{padding:9px 14px;border-bottom:1px solid var(--slate-200);vertical-align:top;color:var(--slate-700);line-height:1.5;}
+.data-table tr:nth-child(even) td{background:#f6f9fb;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;letter-spacing:.3px;}
+.badge-red{background:#fee2e2;color:#b91c1c;}
+.badge-yellow{background:#fef9c3;color:#854d0e;}
+.badge-green{background:#dcfce7;color:#15803d;}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy-900);color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .2s ease;box-shadow:0 8px 24px rgba(0,0,0,0.25);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <div class="brand"><h1>Team Onboarding</h1><p>BY ALPHA SCHOOL</p></div>
+  <div class="role-switcher">
+    <button class="role-btn active" id="btn-dri" onclick="switchRole('dri')">Campus DRI</button>
+    <button class="role-btn" id="btn-coaching" onclick="switchRole('coaching')">Coaching</button>
+  </div>
+  <div class="nav-scroll">
+    <button class="nav-item active" id="nav-dashboard" onclick="showView('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <div class="section-label" id="lbl-p1" onclick="toggleSection('p1')">
+      <span>PHASE 1 &middot; ACCESS</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="section-body" id="sec-p1">
+      <button class="nav-item" onclick="showView('accounts')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Accounts &amp; Access</span></button>
+      <button class="nav-item" onclick="showView('monitoring')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Monitoring Platforms</span></button>
+      <button class="nav-item" onclick="showView('dashboards')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg><span>Data Dashboards</span></button>
+      <button class="nav-item dri-only" onclick="showView('content-platforms')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Content Platforms</span></button>
+      <button class="nav-item" onclick="showView('company-context')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg><span>Company Context</span></button>
+    </div>
+    <div class="section-label" id="lbl-p2" onclick="toggleSection('p2')">
+      <span id="p2-label">PHASE 2 &middot; CORE SKILLS</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="section-body" id="sec-p2">
+      <button class="nav-item" onclick="showView('learning-science')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11M5 9H2m3 0h14m0 0h3M17 9v11M5 20h14"/></svg><span>Learning Science</span></button>
+      <button class="nav-item dri-only" onclick="showView('antipatterns')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Anti-Patterns</span></button>
+      <button class="nav-item dri-only" onclick="showView('deep-dive')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Deep Dive Process</span></button>
+      <button class="nav-item coaching-only hidden" onclick="showView('coaching-expectations')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Coaching Expectations</span></button>
+      <button class="nav-item" onclick="showView('ramp-up')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Ramp-Up Task</span></button>
+    </div>
+    <div class="section-label" id="lbl-p3" onclick="toggleSection('p3')">
+      <span id="p3-label">PHASE 3 &middot; ROUTINES</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="section-body" id="sec-p3">
+      <button class="nav-item dri-only" onclick="showView('daily-routine')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Daily &amp; Weekly Routine</span></button>
+      <button class="nav-item dri-only" onclick="showView('triangle-eval')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 20 2 20"/></svg><span>Triangle Evaluation</span></button>
+      <button class="nav-item coaching-only hidden" onclick="showView('automation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><span>Automation Landscape</span></button>
+      <button class="nav-item" onclick="showView('escalation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg><span>Escalation Paths</span></button>
+      <button class="nav-item" onclick="showView('next-steps')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Next Steps</span></button>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <div class="avatar">YO</div>
+    <div class="who"><div class="name">Your Name</div><div class="role-lbl" id="footer-role">Campus DRI</div></div>
+  </div>
+</aside>
+
+<main class="main">
+<div class="container">
+
+<div id="view-dashboard">
+  <div class="banner">
+    <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div style="flex:1">
+      <p class="eyebrow">GETTING STARTED</p>
+      <h2 id="banner-title">Your Campus DRI Onboarding</h2>
+      <p id="banner-desc">Three phases take you from zero access to running your first week as Campus DRI. Start with Phase 1 to get your tools set up, then move into the skills and routines that define the job.</p>
+      <div class="progress-row">
+        <div class="progress-seg"><span></span></div>
+        <div class="progress-seg"><span></span></div>
+        <div class="progress-seg"><span></span></div>
+        <span class="progress-count">Phase 1 of 3</span>
+      </div>
+    </div>
+  </div>
+  <div class="welcome">
+    <h1>Welcome to the team.</h1>
+    <p id="welcome-sub">You're onboarding as <strong>Campus DRI</strong>. Start below &mdash; your first step is getting access to every platform you'll use.</p>
+  </div>
+  <div class="card">
+    <div class="card-head open" id="journey-head" onclick="toggleJourney()">
+      <div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>YOUR ONBOARDING JOURNEY</div>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </div>
+    <div class="journey-body" id="journey-body">
+      <h2 class="title">Three phases, start to ready</h2>
+      <p class="sub">Everything you need before your first week on the floor.</p>
+      <div id="journey-dri">
+        <div class="phase">
+          <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <div class="phase-content">
+            <p class="ph-eyebrow">PHASE 1</p>
+            <h3>Access &amp; Orientation <span class="meta">&middot; Day 1</span></h3>
+            <div class="sub-label">GET SET UP</div>
+            <ul>
+              <li>Request accounts for all monitoring and data platforms</li>
+              <li>Access the Timeback dashboard and Looker reports</li>
+              <li>Join the right Slack channels and Google Drive folders</li>
+              <li>Read the Alpha mission doc and company context</li>
+            </ul>
+            <div class="success-note">Complete Phase 1 before your first day on campus.</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36z"/></svg></div>
+          <div class="phase-content">
+            <p class="ph-eyebrow">PHASE 2</p>
+            <h3>Core Skills <span class="meta">&middot; Week 1</span></h3>
+            <div class="sub-label">LEARN THE JOB</div>
+            <ul>
+              <li>Understand how Alpha's 2x learning model works</li>
+              <li>Learn to identify the 6 critical anti-patterns from recordings</li>
+              <li>Practice the Deep Dive framework on a real student case</li>
+              <li>Complete your ramp-up shadow and solo monitoring run</li>
+            </ul>
+            <div class="success-note">Shadow a senior Campus DRI for your first deep dive.</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div class="phase-content">
+            <p class="ph-eyebrow">PHASE 3</p>
+            <h3>Routines &amp; Escalation <span class="meta">&middot; Week 2 onward</span></h3>
+            <div class="sub-label">RUN YOUR WEEK</div>
+            <ul>
+              <li>Run the daily monitoring routine (morning check, spot reviews, EOD flags)</li>
+              <li>Conduct the Triangle Evaluation once per session</li>
+              <li>Know the full escalation directory and when to use it</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="journey-coaching" class="hidden">
+        <div class="phase">
+          <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <div class="phase-content">
+            <p class="ph-eyebrow">PHASE 1</p>
+            <h3>Access &amp; Orientation <span class="meta">&middot; Day 1</span></h3>
+            <div class="sub-label">GET SET UP</div>
+            <ul>
+              <li>Activate Slack, Google Workspace, and Notion access</li>
+              <li>Set up student monitoring and dashboard access</li>
+              <li>Read the Alpha mission doc and coaching philosophy</li>
+            </ul>
+            <div class="success-note">Complete Phase 1 before your first session.</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="phase-content">
+            <p class="ph-eyebrow">PHASE 2</p>
+            <h3>Coaching Skills <span class="meta">&middot; Week 1</span></h3>
+            <div class="sub-label">LEARN THE JOB</div>
+            <ul>
+              <li>Understand Alpha's 2x learning science model</li>
+              <li>Learn coaching expectations for each guide tier</li>
+              <li>Complete your shadow and solo ramp-up task</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div class="phase-content">
+            <p class="ph-eyebrow">PHASE 3</p>
+            <h3>Automation &amp; Escalation <span class="meta">&middot; Week 2 onward</span></h3>
+            <div class="sub-label">SCALE YOUR IMPACT</div>
+            <ul>
+              <li>Learn what's automated so you focus on human judgment calls</li>
+              <li>Know the escalation directory for every scenario</li>
+              <li>Run your first full weekly coaching cycle</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-title">START HERE</div>
+  <div class="today-card" onclick="showView('accounts')">
+    <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div class="tcontent"><div class="t1">Phase 1: Accounts &amp; Access</div><div class="t2" id="today-sub">Get every platform account set up before day one on campus</div></div>
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </div>
+  <div class="section-title">COMING UP</div>
+  <div class="upcoming">
+    <div class="upcoming-card" onclick="showView('antipatterns')"><div class="licon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="t1" id="coming1">Anti-Pattern Recognition</div><div class="t2">Phase 2 &middot; Core Skills</div></div></div>
+    <div class="upcoming-card" onclick="showView('deep-dive')"><div class="licon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="t1" id="coming2">Deep Dive Process</div><div class="t2">Phase 2 &middot; Core Skills</div></div></div>
+    <div class="upcoming-card" onclick="showView('escalation')"><div class="licon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg></div><div><div class="t1" id="coming3">Escalation Paths</div><div class="t2">Phase 3 &middot; Routines</div></div></div>
+  </div>
+</div>
+
+<div id="view-accounts" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 1 &middot; ACCESS</span><h2>Accounts &amp; Access</h2><p>Get every account confirmed before your first day. Don't start monitoring until all platforms are accessible.</p></div>
+  <div class="content-section"><h3>Core Accounts</h3>
+    <div class="info-card"><h4>Google Workspace</h4><p>Your @alpha.school email is your key to everything. Confirm you're added to the Campus DRI shared drive and weekly report folder.</p></div>
+    <div class="info-card"><h4>Slack</h4><p>Primary comms. Join these channels before day one:</p><ul><li><strong>#campus-dri-general</strong> &mdash; daily check-ins and flags</li><li><strong>#escalations</strong> &mdash; urgent student issues</li><li><strong>#data-reports</strong> &mdash; automated report drops</li><li><strong>#guide-team</strong> &mdash; stay connected with guides you support</li></ul></div>
+    <div class="info-card"><h4>Notion</h4><p>Playbooks, SOPs, and institutional knowledge. Ask your manager for the Campus DRI workspace link.</p></div>
+  </div>
+  <div class="content-section"><h3>Platform Access Checklist</h3>
+    <table class="data-table">
+      <tr><th>Platform</th><th>Used For</th><th>How to Get Access</th></tr>
+      <tr><td><strong>IXL</strong></td><td>Math &amp; ELA monitoring, skill mastery tracking</td><td>Request from Campus Ops &mdash; include campus and role</td></tr>
+      <tr><td><strong>Math Academy</strong></td><td>Advanced math &mdash; XP, efficiency, task view</td><td>Request from Subject DRI (Math)</td></tr>
+      <tr><td><strong>Zearn</strong></td><td>Elementary math monitoring</td><td>Request from Campus Ops</td></tr>
+      <tr><td><strong>AlphaRead</strong></td><td>Reading fluency and comprehension</td><td>Request from Subject DRI (Reading)</td></tr>
+      <tr><td><strong>Mastery Track</strong></td><td>Cross-subject overview</td><td>Auto-provisioned with Google login</td></tr>
+      <tr><td><strong>Freckle</strong></td><td>Adaptive ELA and Math practice</td><td>Request from Campus Ops</td></tr>
+      <tr><td><strong>Timeback Dashboard</strong></td><td>XP, time, efficiency, session data</td><td>Request from your Subject DRI</td></tr>
+      <tr><td><strong>Looker</strong></td><td>Custom reports and trend views</td><td>Request from Data team via #data-reports</td></tr>
+    </table>
+  </div>
+  <div class="callout"><strong>Before moving on:</strong> Log in to every platform and confirm you can see student data for your campus. If anything is missing, ping Campus Ops in Slack.</div>
+</div>
+
+<div id="view-monitoring" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 1 &middot; ACCESS</span><h2>Student Monitoring Platforms</h2><p>Know what each platform shows and how to read it fast. This is your daily lens on student progress.</p></div>
+  <div class="content-section"><h3>Platform Quick Reference</h3>
+    <div class="info-card"><h4>IXL &mdash; Primary Signal</h4><p>Used for Math and ELA across most grade levels. Key metrics:</p><ul><li><strong>SmartScore:</strong> 0&ndash;100 mastery score. Target 90+ before moving on</li><li><strong>Time on Task:</strong> Minutes this week vs. weekly minimum</li><li><strong>Questions Attempted:</strong> Volume indicator &mdash; low = not engaging</li><li><strong>Skill Path Progress:</strong> Moving forward or stuck on one skill?</li></ul></div>
+    <div class="info-card"><h4>Math Academy &mdash; Advanced Math</h4><ul><li><strong>XP earned this week</strong> vs. target (typically 150 XP)</li><li><strong>Efficiency rate</strong> &mdash; XP per minute. Below 0.5 = concern</li><li><strong>Task completion</strong> &mdash; Are they completing the full path?</li></ul></div>
+    <div class="info-card"><h4>Mastery Track &mdash; 30-Second Overview</h4><p>Cross-subject status (on track / behind / critical) aggregated from all platforms. Good for triage &mdash; then go deeper in the source platform.</p></div>
+  </div>
+  <div class="callout-orange"><strong>Common mistake:</strong> Reading IXL SmartScore in isolation. Always pair it with time on task. A high score from one lucky session is not mastery.</div>
+</div>
+
+<div id="view-dashboards" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 1 &middot; ACCESS</span><h2>Data Dashboards</h2><p>Timeback and Looker are your analytical layer. Navigate both before your first monitoring session.</p></div>
+  <div class="content-section"><h3>Timeback Dashboard</h3>
+    <div class="info-card"><h4>What It Shows</h4><ul><li>Weekly XP by student, sorted by campus</li><li>Time per session with efficiency score (XP/min)</li><li>Subject breakdowns: Math, Reading, Writing, LifeSkills</li><li>Week-over-week trend view</li></ul></div>
+    <div class="info-card"><h4>Key Thresholds</h4>
+      <table class="data-table">
+        <tr><th>Metric</th><th>On Track</th><th>Concern</th><th>Critical</th></tr>
+        <tr><td>Weekly XP (Math)</td><td>&ge; 150 XP</td><td>100&ndash;149 XP</td><td>&lt; 100 XP</td></tr>
+        <tr><td>Weekly Minutes</td><td>&ge; 200 min</td><td>150&ndash;199 min</td><td>&lt; 150 min</td></tr>
+        <tr><td>XP Efficiency</td><td>&gt; 80%</td><td>60&ndash;80%</td><td>&lt; 60%</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="content-section"><h3>Looker Reports</h3>
+    <div class="info-card"><h4>When to Use Looker</h4><ul><li>Tracking a student trend over 4+ weeks</li><li>Preparing a Deep Dive and need historical data</li><li>Pulling data for a weekly campus report</li></ul></div>
+  </div>
+  <div class="callout"><strong>Tip:</strong> Bookmark Timeback filtered to your campus. You'll open it every single morning.</div>
+</div>
+
+<div id="view-content-platforms" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 1 &middot; ACCESS</span><h2>Content &amp; Testing Platforms</h2><p>These deliver the content students learn from. You don't configure them, but you need to understand what students are doing in each one.</p></div>
+  <div class="content-section"><h3>Platform Map by Subject</h3>
+    <table class="data-table">
+      <tr><th>Subject</th><th>Primary Platform</th><th>Extension</th></tr>
+      <tr><td>Math (K&ndash;5)</td><td>Zearn</td><td>IXL Math, Freckle</td></tr>
+      <tr><td>Math (6&ndash;8)</td><td>IXL Math</td><td>Math Academy (advanced)</td></tr>
+      <tr><td>Math (9&ndash;12)</td><td>Math Academy</td><td>IXL Math</td></tr>
+      <tr><td>Reading / ELA</td><td>AlphaRead, IXL ELA</td><td>Freckle ELA</td></tr>
+      <tr><td>Writing</td><td>AlphaWrite</td><td>&mdash;</td></tr>
+      <tr><td>Vocabulary</td><td>Membean, VocabLoco</td><td>&mdash;</td></tr>
+      <tr><td>Fast Math</td><td>100-for-100</td><td>&mdash;</td></tr>
+      <tr><td>LifeSkills</td><td>Synthesis Tutor</td><td>&mdash;</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="view-company-context" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 1 &middot; CONTEXT</span><h2>Company Context</h2><p>Alpha's mission and model in plain language. Understanding this shapes every decision you'll make.</p></div>
+  <div class="content-section"><h3>The Alpha Model</h3>
+    <div class="info-card"><h4>2-Hour Learning</h4><p>Alpha students spend just 2 hours per day on academics and achieve more than traditional students spending 6&ndash;7 hours. Adaptive, mastery-based platforms combined with focused, distraction-free sessions make this possible. Your job is to protect the quality of those 2 hours.</p></div>
+    <div class="info-card"><h4>Guides, Not Teachers</h4><p>Alpha doesn't have traditional teachers. Guides are mentors who create the conditions for student autonomy. The platforms do the teaching. Guides keep students accountable, focused, and supported.</p></div>
+    <div class="info-card"><h4>What "On Track" Means</h4><p>A student is on track when they hit XP targets, spend adequate time on task, and don't exhibit anti-patterns. Two of three = monitoring. Missing all three = intervention required.</p></div>
+  </div>
+  <div class="callout"><strong>Read before day one:</strong> Alpha's Culture Doc and the Campus DRI Playbook (both in your Notion workspace).</div>
+</div>
+
+<div id="view-learning-science" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 2 &middot; SKILLS</span><h2>Learning Science</h2><p>Alpha's model is built on evidence-based principles. Understanding these helps you diagnose why students are struggling and what to do about it.</p></div>
+  <div class="content-section"><h3>Core Principles</h3>
+    <div class="info-card"><h4>Mastery Before Moving On</h4><p>Students don't advance until they demonstrate mastery (90+ SmartScore on IXL, equivalent on other platforms). Rushing ahead creates compounding gaps that are very hard to close later.</p></div>
+    <div class="info-card"><h4>Spaced Repetition &amp; Active Recall</h4><p>The platforms are built on the two most evidence-backed learning strategies. When students skip content, guess randomly, or rush, they break the system and waste time.</p></div>
+    <div class="info-card"><h4>Instructional Videos Are Not Optional</h4><p>Skipping videos before questions is one of the most damaging behaviors. Students who skip consistently underperform on mastery checks and redo the same content multiple times.</p></div>
+    <div class="info-card"><h4>Efficiency = Learning Quality</h4><p>XP efficiency (XP earned &divide; time spent) is a proxy for learning quality. Low efficiency means time is being lost to wrong answers, retries, or off-task behavior. High efficiency means students are prepared, focused, and progressing cleanly.</p></div>
+  </div>
+  <div class="callout"><strong>Key insight:</strong> High time-on-task + low XP almost always means an anti-pattern problem, not a knowledge gap. Check the recording before concluding they "just don't get it."</div>
+</div>
+
+<div id="view-antipatterns" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 2 &middot; SKILLS</span><h2>Anti-Pattern Recognition</h2><p>Anti-patterns are recurring behaviors that waste learning time. Spot them, name them, and get guides to address them.</p></div>
+  <div class="content-section"><h3>The 6 Critical Anti-Patterns</h3>
+    <table class="data-table">
+      <tr><th>Anti-Pattern</th><th>What It Looks Like</th><th>Why It's Damaging</th><th>Severity</th></tr>
+      <tr><td><strong>Video Skipping</strong></td><td>Fast-forwards or skips instructional videos before questions</td><td>Removes instruction step &mdash; repeated wrong answers, time loss</td><td><span class="badge badge-red">Critical</span></td></tr>
+      <tr><td><strong>Random Guessing</strong></td><td>Answers without reading, submits instantly, doesn't check work</td><td>Breaks spaced repetition; inflates wrong-answer counts</td><td><span class="badge badge-red">Critical</span></td></tr>
+      <tr><td><strong>App Closing</strong></td><td>Closes app mid-lesson to restart and avoid harder content</td><td>Resets progress; avoids the difficulty that drives growth</td><td><span class="badge badge-red">Critical</span></td></tr>
+      <tr><td><strong>Off-Task Behavior</strong></td><td>Leaves workspace, talks to others, does non-learning tasks during sessions</td><td>Inflates reported session minutes without actual learning</td><td><span class="badge badge-yellow">Concern</span></td></tr>
+      <tr><td><strong>Doom Loop</strong></td><td>Stuck on same skill 3+ sessions; low SmartScore plateau with no improvement</td><td>Signals knowledge gap or placement issue requiring DRI review</td><td><span class="badge badge-yellow">Concern</span></td></tr>
+      <tr><td><strong>Session Padding</strong></td><td>Long sessions logged but XP/efficiency extremely low</td><td>Distorts data; guide may think student is working when they're not</td><td><span class="badge badge-yellow">Concern</span></td></tr>
+    </table>
+  </div>
+  <div class="content-section"><h3>Documenting an Anti-Pattern</h3>
+    <div class="info-card"><h4>Evidence-First Rule</h4><p>Never flag an anti-pattern without a recording reference. Always include:</p><ul><li>Student name, grade, campus, date</li><li>Recording timestamp or session ID</li><li>Anti-pattern name (standard vocabulary above)</li><li>Frequency: first time / recurring / persistent</li></ul></div>
+  </div>
+  <div class="callout-orange"><strong>Recurring = action required.</strong> One instance = note. Two or more in the same week = write it up and flag the guide. Three or more = escalation.</div>
+</div>
+
+<div id="view-deep-dive" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 2 &middot; SKILLS</span><h2>Deep Dive Process</h2><p>A structured student analysis you produce when recurring issues are detected. Your primary deliverable as Campus DRI.</p></div>
+  <div class="content-section"><h3>Triggers</h3>
+    <div class="info-card"><ul>
+      <li>Student misses XP target 2+ weeks in a row</li>
+      <li>Two or more critical anti-patterns in one week</li>
+      <li>Efficiency below 60% for the second consecutive week</li>
+      <li>Guide flags a student or requests a review</li>
+      <li>Doom loop: 3+ sessions stuck on the same skill</li>
+    </ul></div>
+  </div>
+  <div class="content-section"><h3>Structure</h3>
+    <table class="data-table">
+      <tr><th>Section</th><th>What Goes Here</th></tr>
+      <tr><td><strong>At a Glance</strong></td><td>Key metrics: XP, minutes, efficiency, overall status</td></tr>
+      <tr><td><strong>Issues Identified</strong></td><td>1&ndash;3 specific problems with evidence references</td></tr>
+      <tr><td><strong>Detailed Observations</strong></td><td>Supporting evidence grouped by category (Focus, Video, App Behavior)</td></tr>
+      <tr><td><strong>Root Cause</strong></td><td>Area &rarr; Observed Issue &rarr; Likely Root Cause</td></tr>
+      <tr><td><strong>Recommendations</strong></td><td>One per issue &mdash; specific, actionable, directed at Guide or DRI</td></tr>
+      <tr><td><strong>Action Plan</strong></td><td>Who does what by when. Guide (this week) + DRI follow-up (end of next week)</td></tr>
+    </table>
+  </div>
+  <div class="callout"><strong>Use the template:</strong> The Deep Dive template is in the campus-dri-playbook Notion page. Never write one from scratch.</div>
+</div>
+
+<div id="view-coaching-expectations" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 2 &middot; COACHING</span><h2>Coaching Expectations by Role</h2><p>Different guide tiers need different things from you. Know what each role requires before your first session.</p></div>
+  <div class="content-section"><h3>Guide Tiers &amp; Cadence</h3>
+    <table class="data-table">
+      <tr><th>Tier</th><th>Experience</th><th>Your Focus</th><th>Cadence</th></tr>
+      <tr><td><strong>New Guide</strong></td><td>0&ndash;3 months</td><td>Daily habit formation, anti-pattern awareness, platform basics</td><td>Weekly 1:1 + daily Slack</td></tr>
+      <tr><td><strong>Developing Guide</strong></td><td>3&ndash;12 months</td><td>Coaching language, deeper student insight, handling edge cases</td><td>Bi-weekly 1:1</td></tr>
+      <tr><td><strong>Experienced Guide</strong></td><td>12+ months</td><td>Leadership, mentoring newer guides, complex situations</td><td>Monthly 1:1 + as needed</td></tr>
+    </table>
+  </div>
+  <div class="content-section"><h3>What Good Coaching Looks Like</h3>
+    <div class="info-card"><h4>Student-Facing (via the Guide)</h4><ul><li>Specific, evidence-based feedback &mdash; not general encouragement</li><li>Name the anti-pattern directly in accessible language</li><li>Connect behavior to outcome: "When you skip the video, here's what happens..."</li><li>One clear, actionable thing to change this week</li></ul></div>
+    <div class="info-card"><h4>Coaching the Guide</h4><ul><li>Share the Deep Dive summary &mdash; not just the conclusion</li><li>Ask before telling: "What do you think is going on with [student]?"</li><li>Coach them to observe and debrief, not just monitor from a distance</li><li>Follow up the next week to close the loop</li></ul></div>
+  </div>
+</div>
+
+<div id="view-ramp-up" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 2 &middot; RAMP-UP</span><h2>Ramp-Up Task</h2><p>Your structured first-week task. From reading about the job to actually doing it &mdash; with a safety net.</p></div>
+  <div class="content-section"><h3>Part 1: Shadow &amp; Observe</h3>
+    <div class="info-card"><h4>What to Do</h4><p>Shadow a senior Campus DRI (or your manager) for a full monitoring session. Observe only.</p><ul><li>Watch how they navigate the Timeback dashboard</li><li>Observe how they cross-reference platform data with recordings</li><li>Take notes on which students they flag and why</li><li>Ask questions after &mdash; not during</li></ul></div>
+    <div class="info-card"><h4>Debrief Questions</h4><ul><li>What was the first thing you looked at and why?</li><li>Which students got flagged &mdash; what was the trigger?</li><li>What would have been missed without the recording evidence?</li></ul></div>
+  </div>
+  <div class="content-section"><h3>Part 2: Solo Monitoring Run</h3>
+    <div class="info-card"><h4>What to Do</h4><p>By end of Week 1, run a monitoring session on your own. Review the week's data for your assigned cohort and produce a short written summary:</p><ul><li>List every student reviewed (minimum 5)</li><li>Flag any students needing follow-up and name the reason</li><li>Write up one student who would qualify for a Deep Dive trigger</li><li>Share with your manager for feedback before it goes anywhere else</li></ul></div>
+  </div>
+  <div class="callout"><strong>This is a learning exercise.</strong> Your manager reviews your first solo run and gives feedback within 48 hours. Nothing you flag will be actioned until reviewed. Take risks &mdash; the point is to practice.</div>
+</div>
+
+<div id="view-daily-routine" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; ROUTINES</span><h2>Daily &amp; Weekly Routine</h2><p>Consistency is everything in this role. The routine below is not optional &mdash; it's the job.</p></div>
+  <div class="content-section"><h3>Daily Routine</h3>
+    <table class="data-table">
+      <tr><th>When</th><th>Task</th><th>Where</th></tr>
+      <tr><td><strong>Before students arrive</strong></td><td>Open Timeback. Check yesterday's XP and efficiency for watchlist students. Flag anyone below threshold.</td><td>Timeback, Slack</td></tr>
+      <tr><td><strong>During sessions</strong></td><td>Spot-check 2&ndash;3 recordings. Look for anti-patterns. Note anything to follow up.</td><td>Recording tool, IXL, MA</td></tr>
+      <tr><td><strong>End of day</strong></td><td>Log flags in the monitoring sheet. Send urgent flags to the guide. Update watchlist.</td><td>Google Sheets, Slack</td></tr>
+    </table>
+  </div>
+  <div class="content-section"><h3>Weekly Routine</h3>
+    <table class="data-table">
+      <tr><th>Day</th><th>Task</th></tr>
+      <tr><td><strong>Monday</strong></td><td>Pull weekly XP report. Identify students below target. Set priorities for the week.</td></tr>
+      <tr><td><strong>Tue&ndash;Thu</strong></td><td>Deep monitoring days. Review recordings, cross-reference data, write any triggered Deep Dives.</td></tr>
+      <tr><td><strong>Friday</strong></td><td>Finalize weekly report. Conduct Triangle Evaluation. Send guide feedback. Submit to Subject DRI.</td></tr>
+    </table>
+  </div>
+  <div class="callout"><strong>The 80/20 rule:</strong> 80% of your flags come from 20% of your students. Keep a live watchlist and check those students every day.</div>
+</div>
+
+<div id="view-triangle-eval" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; ROUTINES</span><h2>Triangle Evaluation</h2><p>Your structured assessment of guide quality. Three pillars, once per session.</p></div>
+  <div class="content-section"><h3>The Three Pillars</h3>
+    <div class="info-card"><h4>Pillar 1: Guide Survey</h4><p>Short structured survey sent to the guide once per session. Covers student engagement quality, intervention moments, and guide self-assessment. Read responses before delivering feedback.</p></div>
+    <div class="info-card"><h4>Pillar 2: Head of Campus DRI Review</h4><p>Your data review of the guide's students. Did their cohort improve? Were anti-patterns addressed? Were coaching points delivered? This is the quantitative backbone of the evaluation.</p></div>
+    <div class="info-card"><h4>Pillar 3: Student Academic Performance</h4><p>Aggregate view of the guide's students' outcomes: XP trends, efficiency trends, mastery progression. A guide can work hard and still have poor outcomes &mdash; both matter.</p></div>
+  </div>
+  <div class="content-section"><h3>Performance Thresholds</h3>
+    <table class="data-table">
+      <tr><th>Rating</th><th>What It Means</th><th>Action</th></tr>
+      <tr><td><span class="badge badge-green">Strong</span></td><td>All three pillars positive. Students progressing, guide engaged and self-aware.</td><td>Acknowledge. Document. Continue monitoring.</td></tr>
+      <tr><td><span class="badge badge-yellow">Developing</span></td><td>Mixed signals &mdash; one or two pillars show gaps.</td><td>Structured coaching conversation. 2-week follow-up.</td></tr>
+      <tr><td><span class="badge badge-red">Needs Support</span></td><td>Two or more pillars in the red. Student outcomes declining.</td><td>Escalate to Head of Campus DRI. Formal support plan.</td></tr>
+    </table>
+  </div>
+  <div class="callout-orange"><strong>Important:</strong> Never deliver a Triangle Evaluation rating without first having a conversation. Present findings, then ask the guide to respond.</div>
+</div>
+
+<div id="view-automation" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; AUTOMATION</span><h2>Automation Landscape</h2><p>Know what runs without you so you focus your energy on what requires human judgment.</p></div>
+  <div class="content-section"><h3>What's Automated</h3>
+    <table class="data-table">
+      <tr><th>Process</th><th>Automation</th><th>Where It Goes</th></tr>
+      <tr><td>Weekly XP report</td><td>Runs every Monday morning via data pipeline</td><td>#data-reports on Slack</td></tr>
+      <tr><td>Below-threshold alerts</td><td>Triggers when student misses XP target 2 weeks in a row</td><td>Auto-tags Campus DRI in Slack</td></tr>
+      <tr><td>Doom loop detection</td><td>Flags students stuck on same skill 3+ sessions</td><td>Monitoring sheet</td></tr>
+      <tr><td>Guide Survey delivery</td><td>Sent automatically at end of each session</td><td>Google Sheets responses</td></tr>
+      <tr><td>Monthly campus report</td><td>Auto-drafted from weekly data</td><td>Sent to Subject DRI for review</td></tr>
+    </table>
+  </div>
+  <div class="content-section"><h3>What Still Needs You</h3>
+    <div class="info-card"><h4>Judgment Calls That Can't Be Automated</h4><ul><li>Watching recordings and identifying anti-patterns from behavior</li><li>Reading Guide Survey responses and deciding how to respond</li><li>Deciding when a data signal is a real problem vs. a one-off</li><li>Writing Deep Dives and coaching notes</li><li>Escalation decisions</li></ul></div>
+  </div>
+</div>
+
+<div id="view-escalation" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; ESCALATION</span><h2>Escalation Paths</h2><p>Know exactly who to contact for every type of issue. Escalating late is one of the most common and costly mistakes in this role.</p></div>
+  <div class="content-section"><h3>Escalation Directory</h3>
+    <table class="data-table">
+      <tr><th>Situation</th><th>Who to Contact</th><th>How</th><th>Timeline</th></tr>
+      <tr><td>Student missing XP target 2+ weeks</td><td>Guide + Subject DRI</td><td>Slack DM + flag in weekly report</td><td>Same day</td></tr>
+      <tr><td>3+ critical anti-patterns in one week</td><td>Guide (coaching) + Head of Campus DRI</td><td>Deep Dive doc + Slack</td><td>Within 48 hours</td></tr>
+      <tr><td>Doom loop (3+ sessions stuck)</td><td>Subject DRI</td><td>Slack with data screenshot</td><td>Same day detected</td></tr>
+      <tr><td>Guide not addressing flagged issues</td><td>Head of Campus DRI</td><td>Slack or 1:1</td><td>After 1 week of no action</td></tr>
+      <tr><td>Student placement appears wrong</td><td>Subject DRI</td><td>Email with evidence doc</td><td>Within 48 hours</td></tr>
+      <tr><td>Platform error or data anomaly</td><td>Data team (#data-reports)</td><td>Slack with screenshot</td><td>Same day</td></tr>
+      <tr><td>Student welfare concern</td><td>Head of School directly</td><td>Phone or in-person</td><td>Immediately</td></tr>
+      <tr><td>Guide performance concern (2+ weeks)</td><td>Head of Campus DRI</td><td>Formal 1:1 with Triangle Eval doc</td><td>End of that week</td></tr>
+    </table>
+  </div>
+  <div class="callout-orange"><strong>Golden rule:</strong> When in doubt, escalate. It is never wrong to loop in your manager early. The only mistake is waiting too long.</div>
+  <div class="content-section"><h3>Before You Escalate</h3>
+    <div class="info-card"><h4>Have These Ready</h4><ul><li>Student name, grade, and campus</li><li>The specific metric or behavior that triggered the flag (with data)</li><li>How long it's been happening</li><li>What's already been tried</li><li>A clear ask: decision needed, information needed, or just keeping someone informed?</li></ul></div>
+  </div>
+</div>
+
+<div id="view-next-steps" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">ONBOARDING COMPLETE</span><h2>Next Steps</h2><p>You've made it through onboarding. Here's what to do from here.</p></div>
+  <div class="content-section"><h3>Your First Week Checklist</h3>
+    <div class="info-card"><h4>Before Day 1 on Campus</h4><ul><li>All platform accounts active and tested</li><li>Slack channels joined</li><li>Timeback bookmarked and filtered to your campus</li><li>Campus DRI Playbook read (Notion)</li><li>Shadow session scheduled with your manager or senior DRI</li></ul></div>
+    <div class="info-card"><h4>End of Week 1</h4><ul><li>Shadow session complete</li><li>Solo monitoring run complete and submitted for review</li><li>Feedback received from manager</li><li>Weekly routine established and in your calendar</li></ul></div>
+  </div>
+  <div class="content-section"><h3>Where to Find Help</h3>
+    <table class="data-table">
+      <tr><th>Question Type</th><th>Look First</th><th>Who to Ask</th></tr>
+      <tr><td>Platform access or tech issue</td><td>#data-reports Slack</td><td>Data team or Campus Ops</td></tr>
+      <tr><td>Student data question</td><td>Campus DRI Playbook (Notion)</td><td>Subject DRI for that subject</td></tr>
+      <tr><td>Guide or coaching question</td><td>This onboarding hub</td><td>Head of Campus DRI</td></tr>
+      <tr><td>Escalation decision</td><td>Escalation Paths module</td><td>Your manager</td></tr>
+    </table>
+  </div>
+  <div class="callout"><strong>You're not alone.</strong> Every Campus DRI has been in your seat. The team is active on Slack and your manager expects questions in the first 30 days. Ask early.</div>
+</div>
+
+</div></main></div>
+<div class="toast" id="toast">Complete earlier steps to unlock this.</div>
+<script>
+function showView(name){
+  document.querySelectorAll('[id^="view-"]').forEach(function(v){v.classList.add('hidden');});
+  var el=document.getElementById('view-'+name);
+  if(el)el.classList.remove('hidden');
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.remove('active');});
+  if(name==='dashboard')document.getElementById('nav-dashboard').classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function switchRole(role){
+  document.getElementById('btn-dri').classList.toggle('active',role==='dri');
+  document.getElementById('btn-coaching').classList.toggle('active',role==='coaching');
+  document.getElementById('footer-role').textContent=role==='dri'?'Campus DRI':'Coaching';
+  document.querySelectorAll('.dri-only').forEach(function(el){el.classList.toggle('hidden',role!=='dri');});
+  document.querySelectorAll('.coaching-only').forEach(function(el){el.classList.toggle('hidden',role!=='coaching');});
+  document.getElementById('p2-label').textContent=role==='dri'?'PHASE 2 \u00b7 CORE SKILLS':'PHASE 2 \u00b7 COACHING';
+  document.getElementById('p3-label').textContent=role==='dri'?'PHASE 3 \u00b7 ROUTINES':'PHASE 3 \u00b7 AUTOMATION';
+  document.getElementById('banner-title').textContent=role==='dri'?'Your Campus DRI Onboarding':'Your Coaching Onboarding';
+  document.getElementById('banner-desc').textContent=role==='dri'
+    ?'Three phases take you from zero access to running your first week as Campus DRI. Start with Phase 1 to get your tools set up, then move into the skills and routines that define the job.'
+    :'Three phases take you from zero access to running your first coaching cycle. Start with Phase 1 to set up accounts and platforms, then move into coaching skills and the automation landscape.';
+  document.getElementById('welcome-sub').innerHTML='You\'re onboarding as <strong>'+(role==='dri'?'Campus DRI':'Coaching')+'</strong>. Start below \u2014 your first step is getting access to every platform you\'ll use.';
+  document.getElementById('journey-dri').classList.toggle('hidden',role!=='dri');
+  document.getElementById('journey-coaching').classList.toggle('hidden',role!=='coaching');
+  document.getElementById('today-sub').textContent=role==='dri'?'Get every platform account set up before day one on campus':'Get your Slack, Google Workspace, and monitoring tools active';
+  if(role==='dri'){document.getElementById('coming1').textContent='Anti-Pattern Recognition';document.getElementById('coming2').textContent='Deep Dive Process';document.getElementById('coming3').textContent='Triangle Evaluation';}
+  else{document.getElementById('coming1').textContent='Learning Science';document.getElementById('coming2').textContent='Coaching Expectations';document.getElementById('coming3').textContent='Automation Landscape';}
+  showView('dashboard');
+}
+function toggleJourney(){
+  document.getElementById('journey-head').classList.toggle('open');
+  document.getElementById('journey-body').classList.toggle('collapsed');
+}
+document.getElementById('journey-head').classList.add('open');
+function toggleSection(id){
+  document.getElementById('lbl-'+id).classList.toggle('collapsed');
+  document.getElementById('sec-'+id).classList.toggle('collapsed');
+}
+</script>
+</body>
+</html>
