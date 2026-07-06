@@ -161,9 +161,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
     <div class="section-body nav-phases" id="sec-p2">
       <button class="nav-item" data-view="learning-science" onclick="showView('learning-science')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Learning Science</span></button>
       <button class="nav-item" data-view="antipatterns" onclick="showView('antipatterns')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Anti-Patterns</span></button>
-      <button class="nav-item" data-view="coaching-exp" onclick="showView('coaching-exp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Coaching Expectations</span></button>
       <button class="nav-item" data-view="ramp-up" onclick="showView('ramp-up')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Ramp-Up Task</span></button>
       <button class="nav-item dri-only" data-view="deep-dive" onclick="showView('deep-dive')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Deep Dive Process</span></button>
+      <button class="nav-item dri-only" data-view="guide-request" onclick="showView('guide-request')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>Guide Request Flow</span></button>
     </div>
 
     <div class="section-label nav-phases" id="lbl-p3" onclick="toggleSection('p3')">
@@ -173,8 +173,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
     <div class="section-body nav-phases" id="sec-p3">
       <button class="nav-item" data-view="automation" onclick="showView('automation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><span>Automation Landscape</span></button>
       <button class="nav-item" data-view="escalation" onclick="showView('escalation')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg><span>Escalation Directory</span></button>
-      <button class="nav-item dri-only" data-view="triangle-eval" onclick="showView('triangle-eval')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 20 2 20"/></svg><span>Triangle Evaluation</span></button>
+      <button class="nav-item dri-only" data-view="triangle-eval" onclick="showView('triangle-eval')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 20 2 20"/></svg><span>DRI Evaluations</span></button>
       <button class="nav-item dri-only" data-view="daily-routine" onclick="showView('daily-routine')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Daily Routine</span></button>
+      <button class="nav-item dri-only" data-view="timeback-faq" onclick="showView('timeback-faq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg><span>TimeBack FAQ</span></button>
       <button class="nav-item" data-view="next-steps" onclick="showView('next-steps')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Next Steps</span></button>
     </div>
   </div>
@@ -242,9 +243,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
           <ul>
             <li>Read the four core BrainLift summaries (Andy&rsquo;s Workflowy)</li>
             <li>Study the known student learning anti-patterns list</li>
-            <li>Understand coaching expectations for your role</li>
             <li>Complete Part 1: Anti-pattern identification (7 students on StudyReel/Flow/Vault)</li>
             <li>Complete Part 2: Full deep dive analysis on 10 Winter MAP student cases</li>
+            <li><strong>Campus DRI only:</strong> Study the Deep Dive Process and Guide Request Decision Tree</li>
           </ul>
         </div>
       </div>
@@ -395,23 +396,6 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
   <div class="callout"><strong>Ramp-up connection:</strong> You will identify these exact anti-patterns in real student sessions as part of your Part 1 ramp-up task on StudyReel / TimeBack Flow / Vault.</div>
 </div>
 
-<!-- COACHING EXPECTATIONS -->
-<div id="view-coaching-exp" class="hidden">
-  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
-  <div class="module-hero"><span class="tag">PHASE 2 &middot; SKILLS</span><h2>Coaching Expectations</h2><p>All members of the Academics team coach students. Coaching is how we understand where the system is breaking and what needs to improve.</p></div>
-  <div class="cs"><h3>Expectations by Role</h3>
-    <table class="dt">
-      <tr><th>Role</th><th>Expectation</th></tr>
-      <tr><td><strong>Heads of Academics</strong></td><td>Academic coaching for at least 2 subjects. Minimum five calls per week.</td></tr>
-      <tr><td><strong>Subject DRIs / Learning Strategists</strong></td><td>All call types (pre-test, post-test, academic coaching) for your own subject. Minimum five calls per week.</td></tr>
-      <tr><td><strong>Campus DRIs / Learning Analysts</strong></td><td>All types of coaching calls across all subjects. Time commitment: 8:00 AM CT to 12:00 noon CT at minimum.</td></tr>
-    </table>
-  </div>
-  <div class="cs"><h3>Coaching Contacts</h3>
-    <div class="ic"><h4>Certification Process, Timeline &amp; Requirements</h4><p><strong>Himanshi Goyal</strong> &mdash; himanshi.goyal@alpha.school<br><strong>Fiorella Mendez</strong> &mdash; fiorella.mendez@alpha.school</p></div>
-    <div class="ic"><h4>High School Coaching (SAT &amp; AP)</h4><p>High School students have SAT and AP coaching calls. For further queries: <strong>Hariprasad Soragaon</strong> &mdash; hariprasad.soragaon@alpha.school</p></div>
-  </div>
-</div>
 
 <!-- RAMP-UP TASK -->
 <div id="view-ramp-up" class="hidden">
@@ -477,8 +461,28 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
 <!-- ESCALATION DIRECTORY -->
 <div id="view-escalation" class="hidden">
   <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
-  <div class="module-hero"><span class="tag">PHASE 3 &middot; ESCALATION</span><h2>Escalation Directory</h2><p>For queries about automations, escalate to the following points of contact.</p></div>
-  <div class="cs"><h3>By Category</h3>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; ESCALATION</span><h2>Escalation Directory</h2><p>Know when to escalate, how to escalate, and who to contact for each category of issue.</p></div>
+  <div class="cs"><h3>When to Escalate</h3>
+    <div class="ic"><ul>
+      <li>Student cannot progress due to platform issues</li>
+      <li>Placement appears incorrect</li>
+      <li>Testing requests fall outside normal processes</li>
+      <li>Technical problems are preventing learning</li>
+      <li>Student requires curriculum review</li>
+      <li>A parent concern requires additional support</li>
+    </ul></div>
+  </div>
+  <div class="cs"><h3>How to Escalate</h3>
+    <div class="ic"><p>Always include the following when escalating:</p><ul>
+      <li>Student email</li>
+      <li>Campus</li>
+      <li>Clear summary of the issue</li>
+      <li>Evidence (screenshots, session data, error messages)</li>
+      <li>Requested action</li>
+    </ul></div>
+    <div class="callout-orange"><strong>Best practices:</strong> Look for trends, not isolated events. Verify before escalating. Document every intervention. Follow up after action is taken.</div>
+  </div>
+  <div class="cs"><h3>Directory by Category</h3>
     <table class="dt">
       <tr><th>Category</th><th>POC</th></tr>
       <tr><td>Student-facing automation failures (missing plans, tests not assigned, wrong enrolments, course remnants, rostering issues)</td><td><strong>BeyondAI</strong></td></tr>
@@ -494,16 +498,97 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Hel
   </div>
 </div>
 
-<!-- TRIANGLE EVALUATION (DRI-only) -->
+<!-- DRI EVALUATIONS (DRI-only) -->
 <div id="view-triangle-eval" class="hidden">
   <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
-  <div class="module-hero"><span class="tag">PHASE 3 &middot; CAMPUS DRI</span><h2>Triangle Evaluation</h2><p>Your structured assessment of guide quality. Three pillars, conducted once per session.</p></div>
-  <div class="cs"><h3>The Three Pillars</h3>
-    <div class="ic"><h4>Pillar 1: Guide Survey</h4><p>A structured survey sent to the guide once per session. Covers student engagement quality, intervention moments, and guide self-assessment. Read responses before delivering feedback.</p></div>
-    <div class="ic"><h4>Pillar 2: Head of Campus DRI Review</h4><p>Your direct data review of the guide&rsquo;s students. Did their cohort improve? Were flagged issues addressed? Were coaching points delivered? This is the quantitative backbone of the evaluation.</p></div>
-    <div class="ic"><h4>Pillar 3: Student Academic Performance</h4><p>Aggregate view of the guide&rsquo;s students&rsquo; outcomes across the session: XP trends, efficiency trends, mastery progression. A guide can work hard and still have poor student outcomes &mdash; both matter.</p></div>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; CAMPUS DRI</span><h2>DRI Evaluations &amp; Feedback</h2><p>A 3-category system for evaluating guide quality and your own performance as Campus DRI. Conducted once per session.</p></div>
+  <div class="cs"><h3>3-Category Evaluation System</h3>
+    <table class="dt">
+      <tr><th>Category</th><th>Weight</th><th>What It Covers</th></tr>
+      <tr><td><strong>Guide Survey</strong></td><td>50%</td><td>Structured survey sent to the guide once per session. Read responses before delivering feedback.</td></tr>
+      <tr><td><strong>Head of Campus DRI Review</strong></td><td>25%</td><td>Your direct data review: Did the cohort improve? Were flagged issues addressed? Were coaching points delivered?</td></tr>
+      <tr><td><strong>Student Academic Performance</strong></td><td>25%</td><td>Aggregate outcomes across the session: XP trends, efficiency, mastery progression.</td></tr>
+    </table>
   </div>
-  <div class="callout-orange"><strong>Important:</strong> Never deliver a Triangle Evaluation rating without first having a conversation. Present findings, then ask the guide to respond.</div>
+  <div class="cs"><h3>Guide Survey Questions</h3>
+    <div class="ic"><ul>
+      <li><strong>Q1</strong> &mdash; Response Time</li>
+      <li><strong>Q2</strong> &mdash; Communication</li>
+      <li><strong>Q3</strong> &mdash; Actionable Insights</li>
+      <li><strong>Q4</strong> &mdash; Follows Through on Requests</li>
+      <li><strong>Q5</strong> &mdash; Impact on Your Campus <em>(optional)</em></li>
+    </ul></div>
+  </div>
+  <div class="cs"><h3>Head of Campus DRI Review Areas</h3>
+    <div class="ic"><ul>
+      <li>Monitoring quality</li>
+      <li>Deep Dive quality</li>
+      <li>Escalation judgment</li>
+      <li>Responsiveness</li>
+    </ul></div>
+  </div>
+  <div class="cs"><h3>Student Academic Performance Metrics</h3>
+    <div class="ic"><ul>
+      <li>Grade levels passed per subject <em>(2+ per year)</em></li>
+      <li>MAP growth (Fall &rarr; Winter &rarr; Spring)</li>
+      <li>End-of-year mastery vs. start-of-year baseline</li>
+    </ul></div>
+  </div>
+  <div class="cs"><h3>What Success Looks Like</h3>
+    <div class="ic"><ul>
+      <li>Students are appropriately placed and progressing</li>
+      <li>Guides feel informed and supported</li>
+      <li>Academic issues are identified before they escalate</li>
+      <li>Students become increasingly independent</li>
+      <li>Interventions result in measurable, lasting improvement</li>
+    </ul></div>
+  </div>
+  <div class="callout-orange"><strong>Important:</strong> Never deliver an evaluation without first having a conversation. Present findings, then ask the guide to respond. A single low guide score is not a concern &mdash; patterns matter.</div>
+  <div class="callout"><strong>Remember:</strong> Every spreadsheet, every conversation, every decision has one purpose &mdash; helping students succeed.</div>
+</div>
+
+<!-- GUIDE REQUEST FLOW (DRI-only) -->
+<div id="view-guide-request" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 2 &middot; CAMPUS DRI</span><h2>Guide Request Decision Tree</h2><p>What to do when a guide reaches out with a concern about a student. Follow these six steps every time.</p></div>
+  <div class="cs"><h3>The Six Steps</h3>
+    <div class="ic"><h4>1. Is this within your scope?</h4><p>If yes, continue. If no, route to the appropriate team (Subject DRI, Head of Academics, or support ticket depending on the issue type).</p></div>
+    <div class="ic"><h4>2. Do you have enough information?</h4><p>If no, ask clarifying questions before investigating:<ul><li>Which student? (email)</li><li>Which subject or app?</li><li>What is happening exactly?</li><li>When did it start?</li><li>Any screenshots or error messages?</li></ul></p></div>
+    <div class="ic"><h4>3. Review the evidence</h4><p>Check the relevant data sources:<ul><li>Time on task</li><li>XP &amp; productivity</li><li>Learning accuracy</li><li>Placement history</li><li>StudyReel recordings <em>(if applicable)</em></li><li>Attendance</li><li>Recent interventions</li></ul></p></div>
+    <div class="ic"><h4>4. Identify the root cause</h4><p>Classify what you are seeing:<ul><li><strong>Low Time</strong> &mdash; student is not spending enough time on task</li><li><strong>Low Productivity</strong> &mdash; time is spent but XP output is low</li><li><strong>Low Learning Accuracy</strong> &mdash; accuracy consistently below 80%</li><li><strong>Technical Issue</strong> &mdash; platform or rostering problem</li><li><strong>Unsure</strong> &mdash; escalate with evidence gathered so far</li></ul></p></div>
+    <div class="ic"><h4>5. Respond to the guide</h4><p>Every response should include four things:<ul><li>What you found</li><li>Why it likely happened</li><li>Recommended action</li><li>Any follow-up you will take</li></ul>
+    <p style="margin-top:8px"><em>Example: &ldquo;I noticed they&rsquo;re submitting answers very quickly without reading the explanation after errors&hellip;&rdquo;</em><br><em>Or: &ldquo;Their accuracy has been below 70% for three days in a row&hellip;&rdquo;</em></p></p></div>
+    <div class="ic"><h4>6. Follow up &amp; close the loop</h4><p>Check back after the recommended action has been taken. Did the situation improve? If not, escalate or trigger a Deep Dive.</p></div>
+  </div>
+  <div class="callout"><strong>Always remember:</strong> Be timely &middot; Be clear &middot; Be data-driven &middot; Be actionable &middot; Follow through</div>
+</div>
+
+<!-- TIMEBACK FAQ (DRI-only) -->
+<div id="view-timeback-faq" class="hidden">
+  <div class="back-link" onclick="showView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to Dashboard</div>
+  <div class="module-hero"><span class="tag">PHASE 3 &middot; CAMPUS DRI</span><h2>TimeBack FAQ</h2><p>Common questions you&rsquo;ll encounter from guides. Know the answer before they ask.</p></div>
+  <div class="cs"><h3>No Recommendations Available</h3>
+    <div class="ic"><h4>Student just completed a test or knowledge gaps</h4><p>Wait 15 minutes. If still empty after 15 min, open a support ticket.</p></div>
+    <div class="ic"><h4>No Language content showing (K&ndash;2)</h4><p>Lalilo can take up to 24 hours to populate. If still missing after 24 hours, contact support.</p></div>
+    <div class="ic"><h4>MobyMax shows no recommendations</h4><p>Check activity sorted by most recently completed. If not reassigned within 15 minutes, escalate.</p></div>
+    <div class="ic"><h4>Freckle (Language) empty</h4><p>Contact <strong>Peter Bates</strong>.</p></div>
+  </div>
+  <div class="cs"><h3>Student Getting Repeated Lessons</h3>
+    <div class="ic"><h4>Full plan</h4><p>Check if all lessons in the plan have been completed. Repetition may be a bug &mdash; open a support ticket.</p></div>
+    <div class="ic"><h4>Knowledge gaps</h4><p>Student failed the same type again. This is expected behaviour &mdash; they need to master the gap before moving on.</p></div>
+    <div class="ic"><h4>Low accuracy</h4><p>Accuracy below 80% in MobyMax or Freckle causes automatic reassignment. Check accuracy data and coach accordingly.</p></div>
+  </div>
+  <div class="cs"><h3>Test &amp; Placement Questions</h3>
+    <div class="ic"><h4>Test appears in TimeBack but not in AlphaTest</h4><p>The student is usually marked absent. Verify in AlphaTest, open a support ticket, and ping <strong>Davi Deconti</strong>.</p></div>
+    <div class="ic"><h4>Student wants to test out of a grade</h4><p>If currently doing knowledge gaps: student must complete all gaps first. If rostered and scored below 60%: confirm with the Curriculum DRI &mdash; one test-out attempt is allowed.</p></div>
+    <div class="ic"><h4>Student rostered but failed test intentionally</h4><p>Confirm the situation with the Curriculum DRI, then contact <strong>Davi Deconti</strong>.</p></div>
+    <div class="ic"><h4>High school student still working K&ndash;8 content</h4><p>Students must complete all K&ndash;8 content before HS material unlocks. Accelerate efficiently &mdash; do not skip.</p></div>
+  </div>
+  <div class="cs"><h3>XP &amp; App Issues</h3>
+    <div class="ic"><h4>Guide doesn&rsquo;t understand why a student didn&rsquo;t earn XP</h4><p>Check learning metrics in TimeBack Dash. Use the &ldquo;i&rdquo; information icon on the XP entry. Check StudyReel recordings. If still unclear, open a support ticket in the TB Support&ndash;Academics Group.</p></div>
+    <div class="ic"><h4>App is not working</h4><p>Ask the student (or guide) to log out, clear cache, and log back in. If the issue persists, open a support ticket.</p></div>
+  </div>
+  <div class="callout"><strong>General principle:</strong> Always verify by checking the student&rsquo;s actual experience &mdash; impersonate in TimeBack and check the app directly through an admin account. Do not rely on the dashboards alone.</div>
 </div>
 
 <!-- DAILY ROUTINE (DRI-only) -->
